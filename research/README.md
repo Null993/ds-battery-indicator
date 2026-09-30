@@ -22,6 +22,8 @@ dotnet run --project research/DualSenseProbe -c Release -- research/artifacts/ca
 
 此命令抓取当前指定文件的最近 commit，并按固定 commit 下载、计算 SHA-256；结果写入本地 `artifacts/sources/manifest.json`。本次研究使用的固定清单另存于 `docs/research/dualsense/source-manifest.json`，以后运行不会改写该已提交清单。GitHub 下载使用命令级 127.0.0.1:7890 代理；脚本临时设置的 gh 环境变量在 finally 中恢复。
 
+后续五份追加源码的固定来源见 `docs/research/dualsense/2026-09-30-additional-sources.json`。它们的探测脚本只作阅读，没有运行未知动作扫测。
+
 ## 离线分析
 
 ```powershell
@@ -29,6 +31,14 @@ python research/analyze_artifacts.py research/artifacts
 ```
 
 分析现有固件文件、采样字节变化、时间戳候选、少量 CRC32 假设、Feature 前后差异；不向手柄发送任何请求。输出 `offline-analysis.json`，保留原始输入。脚本没有把高熵字节自动解释成电量/电流，也没有假设固件一定加密。
+
+```powershell
+python research/map_sony_calls.py research/artifacts/sony-native/libFWupdater.original.dll research/artifacts/sony-native
+python research/scan_firmware_containers.py research/artifacts/firmware
+dotnet run --project research/DualSenseProbe -c Release -- research/artifacts/captures/NEW_CHARGING_SESSION 10 --read-21-22
+```
+
+调用映射只作离线候选索引，需人工验证控制流。容器扫描限制解压输出为 4 MiB，记录完整流与校验，不把随机魔数当作格式识别。采样可显式追加 GET_FEATURE 21/22；这两个 ID 在基线固件中已声明，但语义未知，响应只能作原始证据，不转为 V/I/W。所有模式都拒绝写入非空证据目录。后续首次尝试发现零个 USB 手柄，未实际发送这两个查询。
 
 ## UI 回归与预览
 

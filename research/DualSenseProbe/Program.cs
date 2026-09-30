@@ -10,15 +10,27 @@ internal static class Program
 
     private static int Main(string[] args)
     {
-        if (args.Length < 1 || args.Length > 2)
+        if (args.Length < 1 || args.Length > 3 || (args.Length == 3 && args[2] != "--read-21-22"))
         {
-            Console.Error.WriteLine("Usage: DualSenseProbe OUTPUT_DIRECTORY [SECONDS=10, range 1..3600]");
+            Console.Error.WriteLine("Usage: DualSenseProbe OUTPUT_DIRECTORY [SECONDS=10, range 1..3600] [--read-21-22]");
             return 2;
         }
-        int seconds = args.Length == 2 ? int.Parse(args[1]) : 10;
+        int seconds = args.Length >= 2 ? int.Parse(args[1]) : 10;
+        bool readDiagnosticFeatures = args.Length == 3;
         if (seconds < 1 || seconds > 3600) throw new ArgumentOutOfRangeException(nameof(seconds));
         string output = Path.GetFullPath(args[0]);
+        if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any())
+        {
+            Console.Error.WriteLine("Evidence directory is not empty. Choose a new session directory.");
+            return 2;
+        }
         Directory.CreateDirectory(output);
+        Save(output, "session.json", new
+        {
+            startedUtc = DateTimeOffset.UtcNow, requestedSeconds = seconds,
+            plannedGetFeatureIds = readDiagnosticFeatures ? "05,20,21,22" : "05,20",
+            note = "Planned queries are not evidence of execution; check feature snapshots and process exit status."
+        });
         var devices = HidDevices.Enumerate(0x054C, 0x0CE6)
             .Where(d => d.Capabilities.UsagePage == 1 && d.Capabilities.Usage == 5
                 && d.Capabilities.InputReportByteLength == 64).ToArray();
@@ -37,7 +49,7 @@ internal static class Program
         device.OpenDevice();
         if (!device.IsOpen) throw new IOException("HID device could not be opened.");
         Save(output, "descriptor-capabilities.json", ReadDescriptorCapabilities(device));
-        ReadKnownFeatures(device, output, "before");
+        ReadKnownFeatures(device, output, "before", readDiagnosticFeatures);
         var sets = Enumerable.Range(0, 64).Select(_ => new HashSet<byte>()).ToArray();
         var counts = new Dictionary<string, int>();
         int samples = 0, failures = 0;
@@ -65,7 +77,7 @@ internal static class Program
                 counts[batteryByte] = counts.GetValueOrDefault(batteryByte) + 1;
             }
         }
-        ReadKnownFeatures(device, output, "after");
+        ReadKnownFeatures(device, output, "after", readDiagnosticFeatures);
         Save(output, "summary.json", new
         {
             utc = DateTimeOffset.UtcNow, requestedSeconds = seconds,
@@ -80,21 +92,24 @@ internal static class Program
                 sha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(f))) }).ToArray();
         Save(output, "hashes.json", files);
         Console.WriteLine($"Captured {samples} valid USB reports, {failures} failed reads. Artifacts: {output}");
-        Console.WriteLine("Only input reads, capability queries, and GET_FEATURE 0x05/0x20 were issued.");
+        Console.WriteLine(readDiagnosticFeatures
+            ? "Only input reads, capability queries, and GET_FEATURE 0x05/0x20/0x21/0x22 were issued."
+            : "Only input reads, capability queries, and GET_FEATURE 0x05/0x20 were issued.");
         return samples > 0 ? 0 : 4;
     }
 
-    private static void ReadKnownFeatures(HidDevice device, string output, string phase)
+    private static void ReadKnownFeatures(HidDevice device, string output, string phase, bool readDiagnosticFeatures)
     {
         // USB only. Known calibration and firmware-info queries used by Linux/SDL.
-        // No unknown-ID scan, SET_FEATURE, output report, pairing, or firmware update commands.
-        foreach (byte id in new byte[] { 0x05, 0x20 })
+        // Optional 21/22 are advertised on the connected USB firmware. Semantics unverified.
+        // No ID sweep, SET_FEATURE, output report, pairing, or firmware update commands.
+        foreach (byte id in readDiagnosticFeatures ? new byte[] { 0x05, 0x20, 0x21, 0x22 } : new byte[] { 0x05, 0x20 })
         {
             bool ok = device.ReadFeatureData(out byte[] data, id);
             Save(output, $"feature-{id:X2}-{phase}.json", new
             {
                 utc = DateTimeOffset.UtcNow, reportId = id, success = ok,
-                expectedLogicalBytes = id == 5 ? 41 : 64,
+                expectedLogicalBytes = id switch { 5 => 41, 0x21 => 5, _ => 64 },
                 apiBufferBytes = data?.Length ?? 0, hex = ok ? Convert.ToHexString(data!) : null,
                 note = "HidLibrary uses FeatureReportByteLength buffer; success does not expose actual transfer length."
             });

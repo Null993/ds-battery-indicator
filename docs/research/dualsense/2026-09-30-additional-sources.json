@@ -1,0 +1,47 @@
+[
+  {
+    "bytes": 5328,
+    "repo": "dmitrymx/dualsense-diag",
+    "commit": "28f67e80be8ae067a262b4bd7e5197eead101aa2",
+    "url": "https://raw.githubusercontent.com/dmitrymx/dualsense-diag/28f67e80be8ae067a262b4bd7e5197eead101aa2/README.md",
+    "sha256": "7574290EE9F00BD5CD5F4A3A8B42349191311A405510F389B91B0404F0970798",
+    "retrievedUtc": "2026-09-30T15:05:10.8420754+00:00",
+    "path": "README.md"
+  },
+  {
+    "bytes": 16021,
+    "repo": "dmitrymx/dualsense-diag",
+    "commit": "28f67e80be8ae067a262b4bd7e5197eead101aa2",
+    "url": "https://raw.githubusercontent.com/dmitrymx/dualsense-diag/28f67e80be8ae067a262b4bd7e5197eead101aa2/webhid.js",
+    "sha256": "8F963D7865F7D68ABDEA5673F46ED812B6343DDFE7B1571A9C9C1908FF065B6D",
+    "retrievedUtc": "2026-09-30T15:05:13.4760903+00:00",
+    "path": "webhid.js"
+  },
+  {
+    "bytes": 43155,
+    "repo": "dmitrymx/dualsense-diag",
+    "commit": "28f67e80be8ae067a262b4bd7e5197eead101aa2",
+    "url": "https://raw.githubusercontent.com/dmitrymx/dualsense-diag/28f67e80be8ae067a262b4bd7e5197eead101aa2/app.js",
+    "sha256": "FAC5E821ED78369BD499F5822E7B241C991E074C9F3116481305B2A265CE97AA",
+    "retrievedUtc": "2026-09-30T15:05:16.2691735+00:00",
+    "path": "app.js"
+  },
+  {
+    "bytes": 32041,
+    "repo": "dualshock-tools/dualshock-tools.github.io",
+    "commit": "fbbe58d55636ee9b81b71f9aaebba3fd8956a105",
+    "url": "https://raw.githubusercontent.com/dualshock-tools/dualshock-tools.github.io/fbbe58d55636ee9b81b71f9aaebba3fd8956a105/js/controllers/ds5-controller.js",
+    "sha256": "FF542885459A50BF4308AEBD532ACCBD81CFE6AA55880032C3839052B96090B0",
+    "retrievedUtc": "2026-09-30T15:05:18.5121070+00:00",
+    "path": "js/controllers/ds5-controller.js"
+  },
+  {
+    "bytes": 9682,
+    "repo": "nsfm/dualsense-ts",
+    "commit": "243f7d8e15875f43cc62745ac1c21a67d0ea62fd",
+    "url": "https://raw.githubusercontent.com/nsfm/dualsense-ts/243f7d8e15875f43cc62745ac1c21a67d0ea62fd/scripts/dsp_explore.ts",
+    "sha256": "8C0531D27C45000CAF77F08A4C0D51AC1B06BC4224D128C4A46AB0EFE4A1D34D",
+    "retrievedUtc": "2026-09-30T15:05:18.5146476+00:00",
+    "path": "scripts/dsp_explore.ts"
+  }
+]
