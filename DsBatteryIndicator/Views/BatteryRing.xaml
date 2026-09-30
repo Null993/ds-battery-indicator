@@ -28,10 +28,9 @@
             </Path.Data>
         </Path>
 
-        <!-- 充电动画：虚线旋转覆盖层 -->
-        <Path x:Name="ChargingOverlay" Stroke="#60A5FA" StrokeThickness="3"
-              StrokeDashArray="5,3" Fill="Transparent" Visibility="Collapsed"
-              RenderTransformOrigin="0.5,0.5">
+        <!-- 100% 用两段半圆构成整圆，避免单段圆弧起终点重合后消失 -->
+        <Path x:Name="FullRing" Stroke="#4ADE80" StrokeThickness="3"
+              Fill="Transparent" Visibility="Collapsed">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="24,4">
@@ -40,13 +39,10 @@
                     </PathFigure>
                 </PathGeometry>
             </Path.Data>
-            <Path.RenderTransform>
-                <RotateTransform Angle="0"/>
-            </Path.RenderTransform>
         </Path>
 
         <!-- 中心手柄图标（Segoe MDL2 Assets 字体，颜色可绑定） -->
-        <TextBlock Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="20"
+        <TextBlock x:Name="ControllerIcon" Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="20"
                    Foreground="#8899AA" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

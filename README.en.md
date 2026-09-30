@@ -2,6 +2,8 @@
 
 Other Settings includes an optional automatic window visibility checkbox (off by default). On Save, the window follows USB controller connection state, including on startup. The tray can still override visibility until the next connection change. Turning the option off restores the manual visibility preference. Automatic display does not take foreground focus; detection follows the configured polling interval.
 
+The optional charging-power row expands the window from 140×64 to 160×80 and displays watts above the percentage. No verified voltage/current telemetry source is currently available: it shows “— W”, meaning unknown rather than zero. Full battery renders a complete green ring; charging preserves percentage progress and animates only the center icon. See the [protocol and firmware research log](docs/research/dualsense/README.md).
+
 DualSense's standard HID battery field reports coarse 10% bands, not exact percentages. This app displays each band's lower bound (20% means approximately 20–29%). Full charge displays 100% without a charging animation. Linux, SDL and pydualsense often display the band midpoint (25%); that is still an estimate. See [battery reading review](docs/battery-reading-review.md) for sources and verification steps.
 
 [中文](README.md)

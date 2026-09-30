@@ -8,6 +8,7 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
         <DropShadowEffect x:Key="CardShadow" BlurRadius="20" ShadowDepth="2"
                           Opacity="0.5" Color="Black"/>
     </Window.Resources>
@@ -30,12 +31,20 @@
                 IsCharging="{Binding IsCharging}"/>
 
             <!-- 百分比数字 -->
-            <TextBlock Grid.Column="2"
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <TextBlock x:Name="PowerDisplay" Text="{Binding ChargingPowerText}"
+                           Foreground="{Binding AccentColor}" FontSize="12"
+                           HorizontalAlignment="Center"
+                           FontFamily="Segoe UI" Margin="0,0,0,2"
+                           ToolTip="{Binding ChargingPowerHint}"
+                           Visibility="{Binding ShowChargingPower, Converter={StaticResource BoolToVisibility}}"/>
+                <TextBlock x:Name="BatteryPercentDisplay" HorizontalAlignment="Center"
                        Text="{Binding BatteryText}"
                        Foreground="{Binding AccentColor}"
                        FontSize="22" FontWeight="Bold"
                        VerticalAlignment="Center"
                        FontFamily="Segoe UI"/>
+            </StackPanel>
         </Grid>
     </Border>
 

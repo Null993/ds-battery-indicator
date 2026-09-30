@@ -1,0 +1,866 @@
+{
+  "firmware": [
+    {
+      "file": "FWUPDATE000B-0520.bin",
+      "bytes": 950272,
+      "sha256": "79A20C4F58679CBF3876049E99254703014BBE8F368FD8BC601898A3F8BBB201",
+      "header128Hex": "436F7079726967687420284329203230323220536F6E7920496E74657261637469766520456E7465727461696E6D656E7420496E632E000000000000000000004A756E2032342032303234000000000031313A35353A343100000000000000000200E60C0000100000F004000008000000000F010B0000002005000000000000",
+      "entropyBitsPerByte": 7.933663503913289,
+      "header": {
+        "buildDateAt0x40": "Jun 24 2024",
+        "buildTimeAt0x50": "11:55:41",
+        "pidAt0x62": "0x0CE6",
+        "updateVersionAt0x78": "0x0520"
+      },
+      "keywordStrings": [],
+      "blocks16KiB": [
+        {
+          "offset": 0,
+          "bytes": 16384,
+          "entropy": 7.987842991088979
+        },
+        {
+          "offset": 16384,
+          "bytes": 16384,
+          "entropy": 7.987186507136413
+        },
+        {
+          "offset": 32768,
+          "bytes": 16384,
+          "entropy": 7.9898100397829745
+        },
+        {
+          "offset": 49152,
+          "bytes": 16384,
+          "entropy": 7.990350689323297
+        },
+        {
+          "offset": 65536,
+          "bytes": 16384,
+          "entropy": 7.989786980578973
+        },
+        {
+          "offset": 81920,
+          "bytes": 16384,
+          "entropy": 7.989849336484637
+        },
+        {
+          "offset": 98304,
+          "bytes": 16384,
+          "entropy": 7.989248998581141
+        },
+        {
+          "offset": 114688,
+          "bytes": 16384,
+          "entropy": 7.989120190032095
+        },
+        {
+          "offset": 131072,
+          "bytes": 16384,
+          "entropy": 7.988529929180512
+        },
+        {
+          "offset": 147456,
+          "bytes": 16384,
+          "entropy": 7.987523498638535
+        },
+        {
+          "offset": 163840,
+          "bytes": 16384,
+          "entropy": 7.9880023111971665
+        },
+        {
+          "offset": 180224,
+          "bytes": 16384,
+          "entropy": 7.987654087627201
+        },
+        {
+          "offset": 196608,
+          "bytes": 16384,
+          "entropy": 7.988883716360091
+        },
+        {
+          "offset": 212992,
+          "bytes": 16384,
+          "entropy": 7.9869569384544805
+        },
+        {
+          "offset": 229376,
+          "bytes": 16384,
+          "entropy": 7.9909756994257695
+        },
+        {
+          "offset": 245760,
+          "bytes": 16384,
+          "entropy": 7.990763145422952
+        },
+        {
+          "offset": 262144,
+          "bytes": 16384,
+          "entropy": 7.988570180580267
+        },
+        {
+          "offset": 278528,
+          "bytes": 16384,
+          "entropy": 7.989944865474243
+        },
+        {
+          "offset": 294912,
+          "bytes": 16384,
+          "entropy": 7.98782986134082
+        },
+        {
+          "offset": 311296,
+          "bytes": 16384,
+          "entropy": 7.987727854778943
+        },
+        {
+          "offset": 327680,
+          "bytes": 16384,
+          "entropy": 7.989402708611483
+        },
+        {
+          "offset": 344064,
+          "bytes": 16384,
+          "entropy": 7.987397637467229
+        },
+        {
+          "offset": 360448,
+          "bytes": 16384,
+          "entropy": 7.987920156196819
+        },
+        {
+          "offset": 376832,
+          "bytes": 16384,
+          "entropy": 7.988101404080617
+        },
+        {
+          "offset": 393216,
+          "bytes": 16384,
+          "entropy": 7.99047125296974
+        },
+        {
+          "offset": 409600,
+          "bytes": 16384,
+          "entropy": 7.989090567892666
+        },
+        {
+          "offset": 425984,
+          "bytes": 16384,
+          "entropy": 7.98897778041453
+        },
+        {
+          "offset": 442368,
+          "bytes": 16384,
+          "entropy": 7.987847979193659
+        },
+        {
+          "offset": 458752,
+          "bytes": 16384,
+          "entropy": 7.988833319608799
+        },
+        {
+          "offset": 475136,
+          "bytes": 16384,
+          "entropy": 7.989688435787619
+        },
+        {
+          "offset": 491520,
+          "bytes": 16384,
+          "entropy": 7.986704100769809
+        },
+        {
+          "offset": 507904,
+          "bytes": 16384,
+          "entropy": 7.989003313182337
+        },
+        {
+          "offset": 524288,
+          "bytes": 16384,
+          "entropy": 7.988701646078586
+        },
+        {
+          "offset": 540672,
+          "bytes": 16384,
+          "entropy": 7.99001958796719
+        },
+        {
+          "offset": 557056,
+          "bytes": 16384,
+          "entropy": 7.988759526878174
+        },
+        {
+          "offset": 573440,
+          "bytes": 16384,
+          "entropy": 7.9881506741298915
+        },
+        {
+          "offset": 589824,
+          "bytes": 16384,
+          "entropy": 7.990382517398527
+        },
+        {
+          "offset": 606208,
+          "bytes": 16384,
+          "entropy": 7.987980158020991
+        },
+        {
+          "offset": 622592,
+          "bytes": 16384,
+          "entropy": 7.9900926325001596
+        },
+        {
+          "offset": 638976,
+          "bytes": 16384,
+          "entropy": 7.987754294463839
+        },
+        {
+          "offset": 655360,
+          "bytes": 16384,
+          "entropy": 7.989394540341703
+        },
+        {
+          "offset": 671744,
+          "bytes": 16384,
+          "entropy": 7.988691212899513
+        },
+        {
+          "offset": 688128,
+          "bytes": 16384,
+          "entropy": 7.753550551747919
+        },
+        {
+          "offset": 704512,
+          "bytes": 16384,
+          "entropy": 2.7863745255464916
+        },
+        {
+          "offset": 720896,
+          "bytes": 16384,
+          "entropy": 7.990509810021192
+        },
+        {
+          "offset": 737280,
+          "bytes": 16384,
+          "entropy": 7.989473239313649
+        },
+        {
+          "offset": 753664,
+          "bytes": 16384,
+          "entropy": 7.988545166619967
+        },
+        {
+          "offset": 770048,
+          "bytes": 16384,
+          "entropy": 7.990287579327089
+        },
+        {
+          "offset": 786432,
+          "bytes": 16384,
+          "entropy": 7.99023639258876
+        },
+        {
+          "offset": 802816,
+          "bytes": 16384,
+          "entropy": 7.989946709417918
+        },
+        {
+          "offset": 819200,
+          "bytes": 16384,
+          "entropy": 7.990095774525359
+        },
+        {
+          "offset": 835584,
+          "bytes": 16384,
+          "entropy": 7.987282091969149
+        },
+        {
+          "offset": 851968,
+          "bytes": 16384,
+          "entropy": 7.988623124501162
+        },
+        {
+          "offset": 868352,
+          "bytes": 16384,
+          "entropy": 7.990051783620982
+        },
+        {
+          "offset": 884736,
+          "bytes": 16384,
+          "entropy": 7.989876028193454
+        },
+        {
+          "offset": 901120,
+          "bytes": 16384,
+          "entropy": 7.990064460317193
+        },
+        {
+          "offset": 917504,
+          "bytes": 16384,
+          "entropy": 7.989459332704038
+        },
+        {
+          "offset": 933888,
+          "bytes": 16384,
+          "entropy": 0.3842028164257064
+        }
+      ],
+      "interpretationLimit": "High entropy alone cannot distinguish encryption, compression, or opaque binary data. No ISA or load address identified.",
+      "ascii8StringCount": 234
+    },
+    {
+      "file": "FWUPDATE000B-0630.bin",
+      "bytes": 950272,
+      "sha256": "B66528795683D214CA06FE4672D298DE75BF019BD5046442CBEC63FC02974F86",
+      "header128Hex": "436F7079726967687420284329203230323220536F6E7920496E74657261637469766520456E7465727461696E6D656E7420496E632E000000000000000000004A756C2020342032303235000000000031303A33383A343000000000000000000200E60C0000100000F00400001100002A0010010B0000003006000000000000",
+      "entropyBitsPerByte": 7.933807453548407,
+      "header": {
+        "buildDateAt0x40": "Jul  4 2025",
+        "buildTimeAt0x50": "10:38:40",
+        "pidAt0x62": "0x0CE6",
+        "updateVersionAt0x78": "0x0630"
+      },
+      "keywordStrings": [],
+      "blocks16KiB": [
+        {
+          "offset": 0,
+          "bytes": 16384,
+          "entropy": 7.985071091820803
+        },
+        {
+          "offset": 16384,
+          "bytes": 16384,
+          "entropy": 7.989055079724924
+        },
+        {
+          "offset": 32768,
+          "bytes": 16384,
+          "entropy": 7.988341390923781
+        },
+        {
+          "offset": 49152,
+          "bytes": 16384,
+          "entropy": 7.986987059426254
+        },
+        {
+          "offset": 65536,
+          "bytes": 16384,
+          "entropy": 7.9899796521448545
+        },
+        {
+          "offset": 81920,
+          "bytes": 16384,
+          "entropy": 7.989234211706367
+        },
+        {
+          "offset": 98304,
+          "bytes": 16384,
+          "entropy": 7.988992272170352
+        },
+        {
+          "offset": 114688,
+          "bytes": 16384,
+          "entropy": 7.988375318835389
+        },
+        {
+          "offset": 131072,
+          "bytes": 16384,
+          "entropy": 7.989411160793692
+        },
+        {
+          "offset": 147456,
+          "bytes": 16384,
+          "entropy": 7.989863324617605
+        },
+        {
+          "offset": 163840,
+          "bytes": 16384,
+          "entropy": 7.988274910030376
+        },
+        {
+          "offset": 180224,
+          "bytes": 16384,
+          "entropy": 7.988658864532774
+        },
+        {
+          "offset": 196608,
+          "bytes": 16384,
+          "entropy": 7.989275729910188
+        },
+        {
+          "offset": 212992,
+          "bytes": 16384,
+          "entropy": 7.988249796720506
+        },
+        {
+          "offset": 229376,
+          "bytes": 16384,
+          "entropy": 7.989592267794504
+        },
+        {
+          "offset": 245760,
+          "bytes": 16384,
+          "entropy": 7.988729877591762
+        },
+        {
+          "offset": 262144,
+          "bytes": 16384,
+          "entropy": 7.988343705759194
+        },
+        {
+          "offset": 278528,
+          "bytes": 16384,
+          "entropy": 7.98779862737166
+        },
+        {
+          "offset": 294912,
+          "bytes": 16384,
+          "entropy": 7.989477557621358
+        },
+        {
+          "offset": 311296,
+          "bytes": 16384,
+          "entropy": 7.988160545670232
+        },
+        {
+          "offset": 327680,
+          "bytes": 16384,
+          "entropy": 7.990378436103978
+        },
+        {
+          "offset": 344064,
+          "bytes": 16384,
+          "entropy": 7.98945212085362
+        },
+        {
+          "offset": 360448,
+          "bytes": 16384,
+          "entropy": 7.988138679916419
+        },
+        {
+          "offset": 376832,
+          "bytes": 16384,
+          "entropy": 7.987573289377086
+        },
+        {
+          "offset": 393216,
+          "bytes": 16384,
+          "entropy": 7.986626026682037
+        },
+        {
+          "offset": 409600,
+          "bytes": 16384,
+          "entropy": 7.98986666520345
+        },
+        {
+          "offset": 425984,
+          "bytes": 16384,
+          "entropy": 7.989267458309559
+        },
+        {
+          "offset": 442368,
+          "bytes": 16384,
+          "entropy": 7.988081087078237
+        },
+        {
+          "offset": 458752,
+          "bytes": 16384,
+          "entropy": 7.989033244231901
+        },
+        {
+          "offset": 475136,
+          "bytes": 16384,
+          "entropy": 7.989092772176898
+        },
+        {
+          "offset": 491520,
+          "bytes": 16384,
+          "entropy": 7.98899289894681
+        },
+        {
+          "offset": 507904,
+          "bytes": 16384,
+          "entropy": 7.987797148888939
+        },
+        {
+          "offset": 524288,
+          "bytes": 16384,
+          "entropy": 7.98876888523681
+        },
+        {
+          "offset": 540672,
+          "bytes": 16384,
+          "entropy": 7.990333262593695
+        },
+        {
+          "offset": 557056,
+          "bytes": 16384,
+          "entropy": 7.988447682260946
+        },
+        {
+          "offset": 573440,
+          "bytes": 16384,
+          "entropy": 7.990148959727522
+        },
+        {
+          "offset": 589824,
+          "bytes": 16384,
+          "entropy": 7.990413388253613
+        },
+        {
+          "offset": 606208,
+          "bytes": 16384,
+          "entropy": 7.988133242757565
+        },
+        {
+          "offset": 622592,
+          "bytes": 16384,
+          "entropy": 7.986669107513453
+        },
+        {
+          "offset": 638976,
+          "bytes": 16384,
+          "entropy": 7.989620896755645
+        },
+        {
+          "offset": 655360,
+          "bytes": 16384,
+          "entropy": 7.990766245245068
+        },
+        {
+          "offset": 671744,
+          "bytes": 16384,
+          "entropy": 7.986917669003262
+        },
+        {
+          "offset": 688128,
+          "bytes": 16384,
+          "entropy": 7.758131442482329
+        },
+        {
+          "offset": 704512,
+          "bytes": 16384,
+          "entropy": 2.785520602762182
+        },
+        {
+          "offset": 720896,
+          "bytes": 16384,
+          "entropy": 7.9889179457009565
+        },
+        {
+          "offset": 737280,
+          "bytes": 16384,
+          "entropy": 7.989134016284517
+        },
+        {
+          "offset": 753664,
+          "bytes": 16384,
+          "entropy": 7.987805605461974
+        },
+        {
+          "offset": 770048,
+          "bytes": 16384,
+          "entropy": 7.989456340130227
+        },
+        {
+          "offset": 786432,
+          "bytes": 16384,
+          "entropy": 7.9887994687912895
+        },
+        {
+          "offset": 802816,
+          "bytes": 16384,
+          "entropy": 7.989467151724558
+        },
+        {
+          "offset": 819200,
+          "bytes": 16384,
+          "entropy": 7.989146428261609
+        },
+        {
+          "offset": 835584,
+          "bytes": 16384,
+          "entropy": 7.988254466255297
+        },
+        {
+          "offset": 851968,
+          "bytes": 16384,
+          "entropy": 7.988916184365487
+        },
+        {
+          "offset": 868352,
+          "bytes": 16384,
+          "entropy": 7.988781415125213
+        },
+        {
+          "offset": 884736,
+          "bytes": 16384,
+          "entropy": 7.986574955419778
+        },
+        {
+          "offset": 901120,
+          "bytes": 16384,
+          "entropy": 7.988318995758582
+        },
+        {
+          "offset": 917504,
+          "bytes": 16384,
+          "entropy": 7.988483120418113
+        },
+        {
+          "offset": 933888,
+          "bytes": 16384,
+          "entropy": 0.38374624872535734
+        }
+      ],
+      "interpretationLimit": "High entropy alone cannot distinguish encryption, compression, or opaque binary data. No ISA or load address identified.",
+      "ascii8StringCount": 205
+    }
+  ],
+  "captures": [
+    {
+      "capture": "research\\artifacts\\captures\\2026-09-30-usb-baseline",
+      "samples": 1306,
+      "batteryStatusCounts": {
+        "0x2A": 1306
+      },
+      "featureBeforeAfter": {
+        "05": {
+          "successBefore": true,
+          "successAfter": true,
+          "identicalHex": true
+        },
+        "20": {
+          "successBefore": true,
+          "successAfter": true,
+          "identicalHex": true
+        }
+      },
+      "firmwareInfo": {
+        "buildDate": "Jul  4 2025",
+        "buildTime": "10:38:40",
+        "fwType": 3,
+        "swSeries": "0x000B",
+        "hardwareInfo": "0x00001107",
+        "firmwareVersion": "0x0110002A",
+        "updateVersion": "0x0630"
+      },
+      "counterCandidates": [
+        {
+          "wireOffset": 28,
+          "first": 1430721035,
+          "last": 1460397710,
+          "medianDelta": 24389,
+          "mostCommonDeltas": [
+            [
+              24391,
+              385
+            ],
+            [
+              23453,
+              347
+            ],
+            [
+              24392,
+              179
+            ],
+            [
+              12196,
+              77
+            ],
+            [
+              23454,
+              68
+            ],
+            [
+              12195,
+              41
+            ],
+            [
+              24393,
+              22
+            ],
+            [
+              24390,
+              22
+            ]
+          ]
+        },
+        {
+          "wireOffset": 49,
+          "first": 1430726911,
+          "last": 1460402911,
+          "medianDelta": 24000,
+          "mostCommonDeltas": [
+            [
+              24000,
+              935
+            ],
+            [
+              12000,
+              124
+            ],
+            [
+              24001,
+              29
+            ],
+            [
+              23991,
+              24
+            ],
+            [
+              24009,
+              20
+            ],
+            [
+              36000,
+              15
+            ],
+            [
+              24003,
+              12
+            ],
+            [
+              24007,
+              12
+            ]
+          ]
+        }
+      ],
+      "crc32Matches": {},
+      "tailByteEntropies": [
+        {
+          "wireOffset": 40,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 41,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 42,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 43,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 44,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 45,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 46,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 47,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 48,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 49,
+          "uniqueValues": 99,
+          "entropy": 4.517379308260065
+        },
+        {
+          "wireOffset": 50,
+          "uniqueValues": 253,
+          "entropy": 7.864115984226965
+        },
+        {
+          "wireOffset": 51,
+          "uniqueValues": 256,
+          "entropy": 7.934926147878765
+        },
+        {
+          "wireOffset": 52,
+          "uniqueValues": 3,
+          "entropy": 1.1332934162958228
+        },
+        {
+          "wireOffset": 53,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 54,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 55,
+          "uniqueValues": 1,
+          "entropy": -0.0
+        },
+        {
+          "wireOffset": 56,
+          "uniqueValues": 253,
+          "entropy": 7.832068374239779
+        },
+        {
+          "wireOffset": 57,
+          "uniqueValues": 253,
+          "entropy": 7.862520000567807
+        },
+        {
+          "wireOffset": 58,
+          "uniqueValues": 255,
+          "entropy": 7.872155313756039
+        },
+        {
+          "wireOffset": 59,
+          "uniqueValues": 254,
+          "entropy": 7.8442707095321635
+        },
+        {
+          "wireOffset": 60,
+          "uniqueValues": 253,
+          "entropy": 7.839504253453947
+        },
+        {
+          "wireOffset": 61,
+          "uniqueValues": 255,
+          "entropy": 7.8665327752867364
+        },
+        {
+          "wireOffset": 62,
+          "uniqueValues": 254,
+          "entropy": 7.83812366626741
+        },
+        {
+          "wireOffset": 63,
+          "uniqueValues": 256,
+          "entropy": 7.859284336224382
+        }
+      ],
+      "interpretationLimit": "No discharge, charging, independent voltage/current measurement, or SOC transitions in this sample; changing bytes cannot be assigned units from correlation here."
+    }
+  ],
+  "firmwareComparison": {
+    "files": [
+      "FWUPDATE000B-0520.bin",
+      "FWUPDATE000B-0630.bin"
+    ],
+    "equalLength": true,
+    "sameBytesAtSameOffset": 33491,
+    "comparedBytes": 950272,
+    "unchanged16KiBBlocks": []
+  }
+}

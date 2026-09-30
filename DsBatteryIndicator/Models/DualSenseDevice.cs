@@ -20,5 +20,7 @@ public class DualSenseDevice
     public string DeviceId { get; init; } = string.Empty;
     public int BatteryLevel { get; init; }
     public bool IsCharging { get; init; }
+    /// <summary>Battery-side charging power in watts; null until a verified telemetry source is available.</summary>
+    public double? ChargingPowerWatts { get; init; }
     public DeviceStatus Status { get; init; }
 }

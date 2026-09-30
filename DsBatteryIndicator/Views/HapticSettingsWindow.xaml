@@ -407,6 +407,7 @@
         </Grid>
 
         <CheckBox x:Name="ChkAutoWindowVisibility" Margin="0,12,0,0"/>
+        <CheckBox x:Name="ChkShowChargingPower" Margin="0,8,0,0"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
             <Button x:Name="BtnTest" Content="测试" Width="76" Height="30" Margin="0,0,8,0"

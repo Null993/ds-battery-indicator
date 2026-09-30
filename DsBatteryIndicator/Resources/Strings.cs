@@ -27,6 +27,8 @@ public static class Strings
             ["Disconnected"] = "未连接",
             ["Charging"] = "充电中",
             ["FullyCharged"] = "已充满",
+            ["ShowChargingPower"] = "在电量上方显示充电功率（W）",
+            ["ChargingPowerUnavailable"] = "暂无已验证的电池实际充电功率接口；无法读取时显示“— W”，不表示 0 W。",
             ["AutoWindowVisibility"] = "随手柄连接自动显示/隐藏浮窗",
             ["AutoWindowVisibilityHint"] = "保存后生效：连接 USB 手柄时显示，断开时隐藏；托盘仍可手动切换。",
             ["LowBattery"] = "电量不足",
@@ -79,6 +81,8 @@ public static class Strings
             ["Disconnected"] = "Disconnected",
             ["Charging"] = "Charging",
             ["FullyCharged"] = "Fully charged",
+            ["ShowChargingPower"] = "Show charging power above battery level (W)",
+            ["ChargingPowerUnavailable"] = "No verified battery-side charging power telemetry yet; — W means unavailable, not 0 W.",
             ["AutoWindowVisibility"] = "Show/hide window when controller connects/disconnects",
             ["AutoWindowVisibilityHint"] = "Applies on Save: show on USB connection, hide on disconnect; tray toggling remains available.",
             ["LowBattery"] = "Low Battery",
@@ -175,6 +179,8 @@ public static class Strings
     public static string Disconnected => Get("Disconnected");
     public static string Charging => Get("Charging");
     public static string FullyCharged => Get("FullyCharged");
+    public static string ShowChargingPower => Get("ShowChargingPower");
+    public static string ChargingPowerUnavailable => Get("ChargingPowerUnavailable");
     public static string AutoWindowVisibility => Get("AutoWindowVisibility");
     public static string AutoWindowVisibilityHint => Get("AutoWindowVisibilityHint");
     public static string LowBattery => Get("LowBattery");

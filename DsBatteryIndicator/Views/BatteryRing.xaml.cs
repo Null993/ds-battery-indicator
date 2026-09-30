@@ -44,6 +44,7 @@ public partial class BatteryRing : UserControl
     public BatteryRing()
     {
         InitializeComponent();
+        UpdateArc(Progress);
     }
 
     private static void OnProgressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -57,7 +58,7 @@ public partial class BatteryRing : UserControl
         if (d is BatteryRing ring && e.NewValue is Brush brush)
         {
             ring.ForegroundArc.Stroke = brush;
-            ring.ChargingOverlay.Stroke = brush;
+            ring.FullRing.Stroke = brush;
         }
     }
 
@@ -69,6 +70,9 @@ public partial class BatteryRing : UserControl
 
     private void UpdateArc(double progress)
     {
+        progress = double.IsFinite(progress) ? Math.Clamp(progress, 0, 100) : 0;
+        ForegroundArc.Visibility = progress > 0 && progress < 100 ? Visibility.Visible : Visibility.Collapsed;
+        FullRing.Visibility = progress == 100 ? Visibility.Visible : Visibility.Collapsed;
         double angle = (progress / 100.0) * 360.0;
         double radians = (angle - 90) * Math.PI / 180.0;
         double r = 20; // 环形半径
@@ -85,26 +89,20 @@ public partial class BatteryRing : UserControl
     {
         if (isCharging)
         {
-            ForegroundArc.Visibility = Visibility.Collapsed;
-            ChargingOverlay.Visibility = Visibility.Visible;
-            ChargingOverlay.Stroke = AccentColor;
-
+            // Animate the icon rather than replacing percentage progress with a full circle.
             var animation = new DoubleAnimation
             {
-                From = 0,
-                To = 360,
-                Duration = TimeSpan.FromSeconds(2),
+                From = 1,
+                To = 0.45,
+                Duration = TimeSpan.FromSeconds(1),
+                AutoReverse = true,
                 RepeatBehavior = RepeatBehavior.Forever
             };
-            var transform = (RotateTransform)ChargingOverlay.RenderTransform;
-            transform.BeginAnimation(RotateTransform.AngleProperty, animation);
+            ControllerIcon.BeginAnimation(OpacityProperty, animation);
         }
         else
         {
-            ForegroundArc.Visibility = Visibility.Visible;
-            ChargingOverlay.Visibility = Visibility.Collapsed;
-            var transform = (RotateTransform)ChargingOverlay.RenderTransform;
-            transform.BeginAnimation(RotateTransform.AngleProperty, null);
+            ControllerIcon.BeginAnimation(OpacityProperty, null);
         }
     }
 }

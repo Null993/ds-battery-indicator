@@ -24,6 +24,7 @@ public partial class HapticSettingsWindow : Window
 
         var cfg = AppSettings.Instance;
         ChkAutoWindowVisibility.IsChecked = cfg.AutoWindowVisibility;
+        ChkShowChargingPower.IsChecked = cfg.ShowChargingPower;
 
         // 加载配置值
         SliderIntensity.Value = cfg.HapticIntensity;
@@ -119,10 +120,12 @@ public partial class HapticSettingsWindow : Window
         {
             ApplyToConfig();
             cfg.AutoWindowVisibility = ChkAutoWindowVisibility.IsChecked == true;
+            cfg.ShowChargingPower = ChkShowChargingPower.IsChecked == true;
             cfg.Save();
             var ownerWindow = Owner as MainWindow;
             if (ownerWindow != null) ownerWindow.Opacity = cfg.WindowOpacity;
             Close();
+            ownerWindow?.ViewModel.RefreshDisplaySettings();
             ownerWindow?.ApplyWindowVisibility();
         };
     }
@@ -184,6 +187,8 @@ public partial class HapticSettingsWindow : Window
         LblTitle.Text = Strings.HapticSettings;
         ChkAutoWindowVisibility.Content = Strings.AutoWindowVisibility;
         ChkAutoWindowVisibility.ToolTip = Strings.AutoWindowVisibilityHint;
+        ChkShowChargingPower.Content = Strings.ShowChargingPower;
+        ChkShowChargingPower.ToolTip = Strings.ChargingPowerUnavailable;
         LblHapticIntensity.Text = Strings.HapticIntensity;
         LblHapticDuration.Text = Strings.HapticDuration;
         LblLightbarDuration.Text = Strings.LightbarDuration;

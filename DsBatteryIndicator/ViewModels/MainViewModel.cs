@@ -30,6 +30,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     private Brush _accentColor = new SolidColorBrush(Color.FromRgb(0x66, 0x66, 0x66));
     private bool _isBlinking;
     private bool _isConnected;
+    private string _chargingPowerText = "— W";
 
     public event PropertyChangedEventHandler? PropertyChanged;
     public event Action? BlinkRequested;
@@ -50,6 +51,20 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
 
     // Start after the window and tray have subscribed, so startup connection events are not lost.
     public void StartWatching() => _hidService.StartWatching();
+
+    public bool ShowChargingPower => AppSettings.Instance.ShowChargingPower;
+    public string ChargingPowerHint => Strings.ChargingPowerUnavailable;
+    public string ChargingPowerText
+    {
+        get => _chargingPowerText;
+        private set { _chargingPowerText = value; OnPropertyChanged(); }
+    }
+
+    public void RefreshDisplaySettings()
+    {
+        OnPropertyChanged(nameof(ShowChargingPower));
+        OnPropertyChanged(nameof(ChargingPowerHint));
+    }
 
     public bool IsConnected
     {
@@ -164,11 +179,15 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
             Status = device.Status;
             BatteryLevel = device.BatteryLevel;
             BatteryText = $"{device.BatteryLevel}%";
+            ChargingPowerText = device.IsCharging && device.ChargingPowerWatts is double watts
+                && double.IsFinite(watts) && watts >= 0 ? $"{watts:0.00} W" : "— W";
 
             switch (device.Status)
             {
                 case DeviceStatus.Normal:
-                    AccentColor = new SolidColorBrush(Color.FromRgb(0x60, 0xA5, 0xFA)); // 蓝
+                    AccentColor = new SolidColorBrush(device.BatteryLevel == 100
+                        ? Color.FromRgb(0x4A, 0xDE, 0x80)
+                        : Color.FromRgb(0x60, 0xA5, 0xFA));
                     TrayTooltip = $"{Strings.AppName} — {device.BatteryLevel}%";
                     StopBlinking();
                     StopLowBatteryRepeat();
@@ -214,6 +233,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
                 Status = DeviceStatus.Disconnected;
                 BatteryLevel = 0;
                 BatteryText = "——";
+                ChargingPowerText = "— W";
                 IsCharging = false;
                 TrayTooltip = $"{Strings.AppName} — {Strings.Disconnected}";
                 AccentColor = new SolidColorBrush(Color.FromRgb(0x66, 0x66, 0x66));

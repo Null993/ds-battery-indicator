@@ -1,6 +1,11 @@
 using System.ComponentModel;
 using System.Reflection;
 using System.Text.Json;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using System.Windows.Shapes;
 using DsBatteryIndicator;
 using DsBatteryIndicator.Models;
 using DsBatteryIndicator.Services;
@@ -35,6 +40,7 @@ internal static class Program
         var result = BatteryParser.Parse(hidReport.ReportId, hidReport.Data, "fixture");
         Check(result is { BatteryLevel: 20, IsCharging: false, Status: DeviceStatus.Normal },
             "HidLibrary strips ID; parser reads wire byte 53, not adjacent status byte");
+        Check(result!.ChargingPowerWatts == null, "Standard HID parser never invents battery-side power");
 
         for (byte level = 0; level <= 10; level++)
         {
@@ -89,6 +95,10 @@ internal static class Program
         batteryReceived.Invoke(window.ViewModel, new object[] { full });
         Check(window.ViewModel.BatteryText == "100%" && !window.ViewModel.IsCharging,
             "Full charge renders 100% without charging animation");
+        batteryReceived.Invoke(window.ViewModel, new object[] { new DualSenseDevice
+            { BatteryLevel = 100, Status = DeviceStatus.Normal } });
+        Check(window.ViewModel.AccentColor is SolidColorBrush green && green.Color == Color.FromRgb(0x4A, 0xDE, 0x80),
+            "100% outside charging state also uses green");
         window.Hide();
         connectionChanged.Invoke(window.ViewModel, new object[] { true });
         Check(!window.IsVisible, "Repeated unchanged connection does not override manual hide");
@@ -115,6 +125,83 @@ internal static class Program
         var settings = new HapticSettingsWindow();
         Check(settings.FindName("ChkAutoWindowVisibility") is System.Windows.Controls.CheckBox,
             "Other Settings exposes the checkbox");
+        Check(settings.FindName("ChkShowChargingPower") is System.Windows.Controls.CheckBox,
+            "Other Settings exposes power display checkbox");
+        cfg.ShowChargingPower = false;
+        window.ViewModel.RefreshDisplaySettings();
+        app.Dispatcher.Invoke(() => { }, DispatcherPriority.DataBind);
+        Check(window.Width == 140 && window.Height == 64, "Power disabled uses compact layout");
+        cfg.ShowChargingPower = true;
+        window.ViewModel.RefreshDisplaySettings();
+        app.Dispatcher.Invoke(() => { }, DispatcherPriority.DataBind);
+        Check(window.Width == 160 && window.Height == 80, "Power enabled expands layout");
+        Check(window.ViewModel.ChargingPowerText == "— W", "Unavailable power is not invented as zero");
+        var chargingFixture = new DualSenseDevice { BatteryLevel = 50, IsCharging = true,
+            Status = DeviceStatus.Charging, ChargingPowerWatts = 2.37 };
+        batteryReceived.Invoke(window.ViewModel, new object[] { chargingFixture });
+        Check(window.ViewModel.ChargingPowerText.Contains("2")
+            && window.ViewModel.ChargingPowerText.EndsWith(" W"), "Measured power fixture is formatted in watts");
+        foreach (double invalid in new[] { double.NaN, double.PositiveInfinity, -1d })
+        {
+            batteryReceived.Invoke(window.ViewModel, new object[] { new DualSenseDevice
+                { BatteryLevel = 50, IsCharging = true, Status = DeviceStatus.Charging, ChargingPowerWatts = invalid } });
+            Check(window.ViewModel.ChargingPowerText == "— W", "Invalid power cannot become a numerical reading");
+        }
+        connectionChanged.Invoke(window.ViewModel, new object[] { false });
+        Check(window.ViewModel.ChargingPowerText == "— W", "Disconnect clears power");
+        var ring = new BatteryRing { Progress = 100, AccentColor = Brushes.LimeGreen };
+        var fullRing = (Path)ring.FindName("FullRing");
+        var arc = (Path)ring.FindName("ForegroundArc");
+        Check(fullRing.Visibility == Visibility.Visible && arc.Visibility == Visibility.Collapsed
+            && fullRing.Stroke == Brushes.LimeGreen, "100% uses a complete colored ring");
+        ring.IsCharging = true;
+        Check(fullRing.Visibility == Visibility.Visible, "Charging never replaces 100% progress");
+        ring.Progress = 50;
+        Check(fullRing.Visibility == Visibility.Collapsed && arc.Visibility == Visibility.Visible,
+            "50% while charging retains a half arc");
+        var segment = (ArcSegment)ring.FindName("ArcSegment");
+        Check(Math.Abs(segment.Point.X - 24) < 0.001 && Math.Abs(segment.Point.Y - 44) < 0.001,
+            "50% arc ends at the bottom");
+        ring.Progress = 0;
+        Check(fullRing.Visibility == Visibility.Collapsed && arc.Visibility == Visibility.Collapsed,
+            "0% displays no colored progress dot");
+        ring.Progress = 120;
+        Check(fullRing.Visibility == Visibility.Visible, "Out-of-range progress is clamped");
+        ring.Progress = double.NaN;
+        Check(fullRing.Visibility == Visibility.Collapsed && arc.Visibility == Visibility.Collapsed,
+            "Nonfinite progress does not generate invalid geometry");
+        ring.IsCharging = false;
+        if (Environment.GetCommandLineArgs().Length > 1)
+        {
+            string previews = System.IO.Path.GetFullPath(Environment.GetCommandLineArgs()[1]);
+            System.IO.Directory.CreateDirectory(previews);
+            batteryReceived.Invoke(window.ViewModel, new object[] { full });
+            foreach (bool showPower in new[] { false, true })
+            {
+                cfg.ShowChargingPower = showPower;
+                window.ViewModel.RefreshDisplaySettings();
+                window.Show();
+                app.Dispatcher.Invoke(() => { }, DispatcherPriority.Render);
+                window.UpdateLayout();
+                if (showPower)
+                {
+                    var powerText = (System.Windows.Controls.TextBlock)window.FindName("PowerDisplay");
+                    var batteryText = (System.Windows.Controls.TextBlock)window.FindName("BatteryPercentDisplay");
+                    var powerCenter = powerText.TranslatePoint(new Point(powerText.ActualWidth / 2, 0), window);
+                    var batteryCenter = batteryText.TranslatePoint(new Point(batteryText.ActualWidth / 2, 0), window);
+                    Check(Math.Abs(powerCenter.X - batteryCenter.X) < 0.1,
+                        "Power and battery text share the same center axis");
+                }
+                var bitmap = new RenderTargetBitmap((int)(window.Width * 2), (int)(window.Height * 2),
+                    192, 192, PixelFormats.Pbgra32);
+                bitmap.Render(window);
+                var encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                using var stream = System.IO.File.Create(System.IO.Path.Combine(previews,
+                    showPower ? "full-battery-power-enabled.png" : "full-battery-power-disabled.png"));
+                encoder.Save(stream);
+            }
+        }
         window.Hide();
         window.ViewModel.Dispose();
         Console.WriteLine($"PASS: {_checks} regression checks. No hardware used; no settings written.");

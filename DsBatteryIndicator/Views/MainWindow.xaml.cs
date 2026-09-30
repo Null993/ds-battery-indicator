@@ -41,6 +41,11 @@ public partial class MainWindow : Window
 
         _viewModel = new MainViewModel();
         DataContext = _viewModel;
+        _viewModel.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == nameof(MainViewModel.ShowChargingPower)) ApplyDisplayLayout();
+        };
+        ApplyDisplayLayout();
 
         _viewModel.BlinkRequested += StartBlink;
         _viewModel.BlinkStopped += StopBlink;
@@ -73,6 +78,7 @@ public partial class MainWindow : Window
         // 本地化菜单
         UpdateMenuTexts();
         Strings.LanguageChanged += UpdateMenuTexts;
+        Strings.LanguageChanged += _viewModel.RefreshDisplaySettings;
 
         MenuHide.Click += (s, e) => Hide();
         MenuTopmost.IsChecked = _isTopmost;
@@ -157,6 +163,12 @@ public partial class MainWindow : Window
             Show(); // Automatic display must not take focus away from the current app.
         else
             Hide();
+    }
+
+    private void ApplyDisplayLayout()
+    {
+        Width = _viewModel.ShowChargingPower ? 160 : 140;
+        Height = _viewModel.ShowChargingPower ? 80 : 64;
     }
 
     private void UpdateMenuTexts()

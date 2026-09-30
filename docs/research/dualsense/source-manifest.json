@@ -1,0 +1,173 @@
+[
+  {
+    "repo": "torvalds/linux",
+    "path": "drivers/hid/hid-playstation.c",
+    "commit": "cd4f494ba535e848e2d299707d363de84e61a518",
+    "url": "https://raw.githubusercontent.com/torvalds/linux/cd4f494ba535e848e2d299707d363de84e61a518/drivers/hid/hid-playstation.c",
+    "retrievedUtc": "2026-09-30T14:09:41.4533667+00:00",
+    "localFile": "torvalds__linux__drivers__hid__hid-playstation.c",
+    "bytes": 94073,
+    "sha256": "48A08DDDF8D276A611195311A29CD4F113A949A1F5431ECC84B0396B106EC896"
+  },
+  {
+    "repo": "libsdl-org/SDL",
+    "path": "src/joystick/hidapi/SDL_hidapi_ps5.c",
+    "commit": "0c8feecce6e57a7a8c1b1eb06631e0a7a56fcd8f",
+    "url": "https://raw.githubusercontent.com/libsdl-org/SDL/0c8feecce6e57a7a8c1b1eb06631e0a7a56fcd8f/src/joystick/hidapi/SDL_hidapi_ps5.c",
+    "retrievedUtc": "2026-09-30T14:09:44.1913776+00:00",
+    "localFile": "libsdl-org__SDL__src__joystick__hidapi__SDL_hidapi_ps5.c",
+    "bytes": 64783,
+    "sha256": "C535231BF9EC785E4E7DC1805C5D989D534CA5B9A3F47B1FE354B224FAF22A16"
+  },
+  {
+    "repo": "nowrep/dualsensectl",
+    "path": "main.c",
+    "commit": "d3ae2fa272e1bf9a5c08a0ded3f374b40f7c73ac",
+    "url": "https://raw.githubusercontent.com/nowrep/dualsensectl/d3ae2fa272e1bf9a5c08a0ded3f374b40f7c73ac/main.c",
+    "retrievedUtc": "2026-09-30T14:09:48.3702104+00:00",
+    "localFile": "nowrep__dualsensectl__main.c",
+    "bytes": 60611,
+    "sha256": "0A26DA8399B0DE010DDC037B5CCE42A849F09CE295DD56B66D0C2727D1A4B00B"
+  },
+  {
+    "repo": "nowrep/dualsensectl",
+    "path": "README.md",
+    "commit": "f0c2bb17e6d5154d47fb326d416b754fe8928d53",
+    "url": "https://raw.githubusercontent.com/nowrep/dualsensectl/f0c2bb17e6d5154d47fb326d416b754fe8928d53/README.md",
+    "retrievedUtc": "2026-09-30T14:09:50.3493737+00:00",
+    "localFile": "nowrep__dualsensectl__README.md",
+    "bytes": 4611,
+    "sha256": "057FBC9FE24E790163FE3A1E46AC478B81A1E3021C2685EBBA5205D5A058A679"
+  },
+  {
+    "repo": "nondebug/dualsense",
+    "path": "README.md",
+    "commit": "b87450eb1c4ba8d74948f13b43d4c1eaa8ffa4f5",
+    "url": "https://raw.githubusercontent.com/nondebug/dualsense/b87450eb1c4ba8d74948f13b43d4c1eaa8ffa4f5/README.md",
+    "retrievedUtc": "2026-09-30T14:09:52.4270031+00:00",
+    "localFile": "nondebug__dualsense__README.md",
+    "bytes": 7247,
+    "sha256": "D5C93082C34AF2D0B17000A5B18A59AAEEC8935401961103195D96D3100AEA20"
+  },
+  {
+    "repo": "nondebug/dualsense",
+    "path": "dualsense-explorer.html",
+    "commit": "6da9c2c48c9ff98fbcc7bba792d742bfbd741018",
+    "url": "https://raw.githubusercontent.com/nondebug/dualsense/6da9c2c48c9ff98fbcc7bba792d742bfbd741018/dualsense-explorer.html",
+    "retrievedUtc": "2026-09-30T14:09:55.6118861+00:00",
+    "localFile": "nondebug__dualsense__dualsense-explorer.html",
+    "bytes": 45644,
+    "sha256": "7D1FEF975E5AE13F6033D5221368BDD3439C7BB7E227F562210C5163F2B94F35"
+  },
+  {
+    "repo": "nondebug/dualsense",
+    "path": "report-descriptor-usb.txt",
+    "commit": "df47ec846040347cad8e142c268ad64c9fd1ff1c",
+    "url": "https://raw.githubusercontent.com/nondebug/dualsense/df47ec846040347cad8e142c268ad64c9fd1ff1c/report-descriptor-usb.txt",
+    "retrievedUtc": "2026-09-30T14:09:59.7509664+00:00",
+    "localFile": "nondebug__dualsense__report-descriptor-usb.txt",
+    "bytes": 7461,
+    "sha256": "90DAEB195CF8C48B2CF8E211197CF3D9D6195FE0D5A1FB774BA7ADAA07826DF6"
+  },
+  {
+    "repo": "nondebug/dualsense",
+    "path": "report-descriptor-bluetooth.txt",
+    "commit": "169e79380424e272b253173871c9fee3e68ea00f",
+    "url": "https://raw.githubusercontent.com/nondebug/dualsense/169e79380424e272b253173871c9fee3e68ea00f/report-descriptor-bluetooth.txt",
+    "retrievedUtc": "2026-09-30T14:10:02.3814794+00:00",
+    "localFile": "nondebug__dualsense__report-descriptor-bluetooth.txt",
+    "bytes": 7516,
+    "sha256": "4569501BFD04B2D5AC10C9F9F052C0785B15C70C4DA4D92B46EF70666E27388D"
+  },
+  {
+    "repo": "Paliverse/DualSense-List-of-Firmwares",
+    "path": "README.md",
+    "commit": "d520913335e797be8497c805c15a039e6a8ddc3c",
+    "url": "https://raw.githubusercontent.com/Paliverse/DualSense-List-of-Firmwares/d520913335e797be8497c805c15a039e6a8ddc3c/README.md",
+    "retrievedUtc": "2026-09-30T14:10:04.6305559+00:00",
+    "localFile": "Paliverse__DualSense-List-of-Firmwares__README.md",
+    "bytes": 7299,
+    "sha256": "D9E0D9D373B8D8ED73E1714418F566F1BA1CD7148DA4C0DAF49E867699B2AAF5"
+  },
+  {
+    "repo": "dualshock-tools/ds4-tools",
+    "path": "ds5-calibration-tool.py",
+    "commit": "94e8d94d0b7d41cebca8158d565d7ce9a631a419",
+    "url": "https://raw.githubusercontent.com/dualshock-tools/ds4-tools/94e8d94d0b7d41cebca8158d565d7ce9a631a419/ds5-calibration-tool.py",
+    "localFile": "dualshock-tools__ds4-tools__ds5-calibration-tool.py",
+    "bytes": 5074,
+    "sha256": "8DBE283E5F627A0FD2E9F69926942F350297E967EE24ECC2304BBE6951B3418E"
+  },
+  {
+    "repo": "dualshock-tools/ds4-tools",
+    "path": "README.md",
+    "commit": "94e8d94d0b7d41cebca8158d565d7ce9a631a419",
+    "url": "https://raw.githubusercontent.com/dualshock-tools/ds4-tools/94e8d94d0b7d41cebca8158d565d7ce9a631a419/README.md",
+    "localFile": "dualshock-tools__ds4-tools__README.md",
+    "bytes": 4278,
+    "sha256": "86797A6CAF285BD047A05DAF78A110758DB1F73A8FC18CF72D133E16ABA96AA8"
+  },
+  {
+    "repo": "nsfm/dualsense-ts",
+    "path": "src/hid/battery_state.ts",
+    "commit": "80370fff44fd4a677e5d77a1c3843354ca1672ca",
+    "url": "https://raw.githubusercontent.com/nsfm/dualsense-ts/80370fff44fd4a677e5d77a1c3843354ca1672ca/src/hid/battery_state.ts",
+    "localFile": "nsfm__dualsense-ts__src__hid__battery_state.ts",
+    "bytes": 226,
+    "sha256": "BC6FBB3AE9836BE6FE4C7ACA670126F71E398656B3EC61A2E483B4043FF37527"
+  },
+  {
+    "repo": "nsfm/dualsense-ts",
+    "path": "src/hid/command.ts",
+    "commit": "80370fff44fd4a677e5d77a1c3843354ca1672ca",
+    "url": "https://raw.githubusercontent.com/nsfm/dualsense-ts/80370fff44fd4a677e5d77a1c3843354ca1672ca/src/hid/command.ts",
+    "localFile": "nsfm__dualsense-ts__src__hid__command.ts",
+    "bytes": 4539,
+    "sha256": "A951F412FC6A9595864B3E04278E8BDFC45DAF3D8697477355C3B4397BB311F7"
+  },
+  {
+    "repo": "nsfm/dualsense-ts",
+    "path": "src/hid/factory_info.ts",
+    "commit": "80370fff44fd4a677e5d77a1c3843354ca1672ca",
+    "url": "https://raw.githubusercontent.com/nsfm/dualsense-ts/80370fff44fd4a677e5d77a1c3843354ca1672ca/src/hid/factory_info.ts",
+    "localFile": "nsfm__dualsense-ts__src__hid__factory_info.ts",
+    "bytes": 6747,
+    "sha256": "D896582C53B50341DD54700C210E9D4084FD99867A7D3CC16BD7B57C472E9F2F"
+  },
+  {
+    "repo": "nsfm/dualsense-ts",
+    "path": "src/hid/dsp.ts",
+    "commit": "80370fff44fd4a677e5d77a1c3843354ca1672ca",
+    "url": "https://raw.githubusercontent.com/nsfm/dualsense-ts/80370fff44fd4a677e5d77a1c3843354ca1672ca/src/hid/dsp.ts",
+    "localFile": "nsfm__dualsense-ts__src__hid__dsp.ts",
+    "bytes": 4493,
+    "sha256": "F1B54DCADF97833B52F062A5E68C57F61ABE23FCB88F514CAF2CE6D08E0C6DEA"
+  },
+  {
+    "repo": "nsfm/dualsense-ts",
+    "path": "src/hid/dualsense_hid.ts",
+    "commit": "80370fff44fd4a677e5d77a1c3843354ca1672ca",
+    "url": "https://raw.githubusercontent.com/nsfm/dualsense-ts/80370fff44fd4a677e5d77a1c3843354ca1672ca/src/hid/dualsense_hid.ts",
+    "localFile": "nsfm__dualsense-ts__src__hid__dualsense_hid.ts",
+    "bytes": 22359,
+    "sha256": "A2A984EF466AC4E6CDABA6B1349E3F8E6D5F1B03B51E71AC2D5726BECD41EC69"
+  },
+  {
+    "repo": "olliejudge/dsmactools",
+    "path": "src/firmware.rs",
+    "commit": "5275c3e4ccbcf1309c161d0250dae23284fda557",
+    "url": "https://raw.githubusercontent.com/olliejudge/dsmactools/5275c3e4ccbcf1309c161d0250dae23284fda557/src/firmware.rs",
+    "localFile": "olliejudge__dsmactools__src__firmware.rs",
+    "bytes": 12600,
+    "sha256": "96E8F7B37AA01846C8ACA182474E8E4B60FAD451CA45522B2B720809612DA8BA"
+  },
+  {
+    "repo": "olliejudge/dsmactools",
+    "path": "src/protocol.rs",
+    "commit": "5275c3e4ccbcf1309c161d0250dae23284fda557",
+    "url": "https://raw.githubusercontent.com/olliejudge/dsmactools/5275c3e4ccbcf1309c161d0250dae23284fda557/src/protocol.rs",
+    "localFile": "olliejudge__dsmactools__src__protocol.rs",
+    "bytes": 3325,
+    "sha256": "FA83DF0863EEB6FFBEA2AB7F59E82F39D61BE2FFFE5786F18D82DE99CA32809C"
+  }
+]
