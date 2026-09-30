@@ -37,6 +37,7 @@ public class AppSettings
     public bool Topmost { get; set; } = true;
     public bool RtssEnabled { get; set; } = false;
     public bool WindowVisible { get; set; } = true;
+    public bool AutoWindowVisibility { get; set; } = false;
 
     // 震动/灯带配置
     public int HapticDurationMs { get; set; } = 800;

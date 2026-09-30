@@ -4,23 +4,29 @@ namespace DsBatteryIndicator.Services;
 
 /// <summary>
 /// DualSense USB HID 输入报告解析器。
-/// 参考 Linux hid-playstation.c: byte[52] bits[3:0]=电量档位(×10=%), bits[7:4]=充电状态
+/// HidReport.Data 不包含 Report ID：USB 完整报告 byte[53] 对应 Data[52]。
+/// 低四位为约 10% 一档的电量，高四位为充电状态；不是精确百分比。
 /// </summary>
 public static class BatteryParser
 {
-    public static DualSenseDevice? Parse(byte[] report, string deviceId)
+    public static DualSenseDevice? Parse(byte reportId, byte[] data, string deviceId)
     {
-        if (report.Length < 53) return null;
+        // Only USB's full 64-byte input report is supported. BT uses a different header/CRC.
+        if (reportId != 0x01 || data.Length != 63) return null;
 
-        int rawBattery = report[52];
+        int rawBattery = data[52];
         int level = rawBattery & 0x0F;
-        int batteryLevel = Math.Clamp(level * 10, 0, 100);
 
         int chargeState = (rawBattery >> 4) & 0x0F;
-        bool isCharging = chargeState == 1 || chargeState == 2;
+        // Do not interpret reserved levels or charging errors as an empty battery.
+        if (level > 10 || chargeState > 2) return null;
+        int batteryLevel = chargeState == 2 ? 100 : level * 10;
+        bool isCharging = chargeState == 1;
 
         DeviceStatus status;
-        if (isCharging)
+        if (chargeState == 2)
+            status = DeviceStatus.FullyCharged;
+        else if (isCharging)
             status = DeviceStatus.Charging;
         else if (batteryLevel <= AppSettings.Instance.LowBatteryThreshold)
             status = DeviceStatus.LowBattery;

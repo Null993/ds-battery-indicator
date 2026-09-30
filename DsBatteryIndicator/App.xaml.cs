@@ -22,18 +22,21 @@ public partial class App : Application
 
         _mainWindow = new MainWindow();
         _mainWindow.ViewModel.TrayIcon = _notifyIcon;
-        if (AppSettings.Instance.WindowVisible)
-            _mainWindow.Show();
-
         _mainWindow.ViewModel.PropertyChanged += OnViewModelPropertyChanged;
         _mainWindow.IsVisibleChanged += (s, e) => UpdateTrayShowHideText();
         Strings.LanguageChanged += () => UpdateTrayShowHideText();
 
+        _mainWindow.ApplyWindowVisibility();
+        _mainWindow.ViewModel.StartWatching();
         UpdateTrayShowHideText();
     }
 
     private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
+        if (e.PropertyName == nameof(ViewModels.MainViewModel.IsConnected)
+            && AppSettings.Instance.AutoWindowVisibility)
+            _mainWindow?.ApplyWindowVisibility();
+
         if (e.PropertyName == nameof(ViewModels.MainViewModel.TrayTooltip)
             && _notifyIcon != null
             && _mainWindow != null)
@@ -89,7 +92,8 @@ public partial class App : Application
         });
         contextMenu.Items.Add(Strings.Exit, null, (s, e) =>
         {
-            AppSettings.Instance.WindowVisible = _mainWindow?.IsVisible ?? false;
+            if (!AppSettings.Instance.AutoWindowVisibility)
+                AppSettings.Instance.WindowVisible = _mainWindow?.IsVisible ?? false;
             AppSettings.Instance.Save();
             _notifyIcon?.Dispose();
             Shutdown();
@@ -100,6 +104,7 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
+        _mainWindow?.ViewModel.Dispose();
         _notifyIcon?.Dispose();
         base.OnExit(e);
     }

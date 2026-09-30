@@ -149,6 +149,16 @@ public partial class MainWindow : Window
         AppSettings.Instance.Save();
     }
 
+    public void ApplyWindowVisibility()
+    {
+        var cfg = AppSettings.Instance;
+        bool visible = cfg.AutoWindowVisibility ? _viewModel.IsConnected : cfg.WindowVisible;
+        if (visible)
+            Show(); // Automatic display must not take focus away from the current app.
+        else
+            Hide();
+    }
+
     private void UpdateMenuTexts()
     {
         MenuHide.Header = Strings.ShowHide;

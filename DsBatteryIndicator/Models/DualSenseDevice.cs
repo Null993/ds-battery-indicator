@@ -8,7 +8,8 @@ public enum DeviceStatus
     Disconnected,  // 未连接
     Normal,        // 正常（电量 > 10% 且未充电）
     Charging,      // 充电中
-    LowBattery     // 低电量（≤ 10% 且未充电）
+    LowBattery,    // 低电量（≤ 配置阈值且未充电）
+    FullyCharged   // 已充满，不播放充电动画
 }
 
 /// <summary>

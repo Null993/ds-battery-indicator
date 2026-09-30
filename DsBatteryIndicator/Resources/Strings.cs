@@ -26,6 +26,9 @@ public static class Strings
             ["Hide"] = "隐藏",
             ["Disconnected"] = "未连接",
             ["Charging"] = "充电中",
+            ["FullyCharged"] = "已充满",
+            ["AutoWindowVisibility"] = "随手柄连接自动显示/隐藏浮窗",
+            ["AutoWindowVisibilityHint"] = "保存后生效：连接 USB 手柄时显示，断开时隐藏；托盘仍可手动切换。",
             ["LowBattery"] = "电量不足",
             ["Toast_LowBattery"] = "DualSense 电量不足 ({0}%)，请充电",
             ["About_Text"] = "DS 电池指示器 v1.0\n显示 DualSense 手柄电量",
@@ -75,6 +78,9 @@ public static class Strings
             ["Hide"] = "Hide",
             ["Disconnected"] = "Disconnected",
             ["Charging"] = "Charging",
+            ["FullyCharged"] = "Fully charged",
+            ["AutoWindowVisibility"] = "Show/hide window when controller connects/disconnects",
+            ["AutoWindowVisibilityHint"] = "Applies on Save: show on USB connection, hide on disconnect; tray toggling remains available.",
             ["LowBattery"] = "Low Battery",
             ["Toast_LowBattery"] = "DualSense battery low ({0}%), please charge",
             ["About_Text"] = "DS Battery Indicator v1.0\nDisplay DualSense controller battery level",
@@ -168,6 +174,9 @@ public static class Strings
     public static string Hide => Get("Hide");
     public static string Disconnected => Get("Disconnected");
     public static string Charging => Get("Charging");
+    public static string FullyCharged => Get("FullyCharged");
+    public static string AutoWindowVisibility => Get("AutoWindowVisibility");
+    public static string AutoWindowVisibilityHint => Get("AutoWindowVisibilityHint");
     public static string LowBattery => Get("LowBattery");
     public static string Toast_LowBattery => Get("Toast_LowBattery");
     public static string About_Text => Get("About_Text");

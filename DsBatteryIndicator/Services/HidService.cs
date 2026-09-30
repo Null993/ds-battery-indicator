@@ -13,7 +13,6 @@ public class HidService : IDisposable
 
     private HidDevice? _device;
     private bool _disposed;
-    private int _retryCount;
     private CancellationTokenSource? _cts;
 
     public event Action<DualSenseDevice>? BatteryDataReceived;
@@ -21,47 +20,47 @@ public class HidService : IDisposable
 
     public void StartWatching()
     {
+        if (_disposed || _cts != null) return;
         _cts = new CancellationTokenSource();
-        _ = TryConnectAsync();
-        _ = ReadLoopAsync(_cts.Token);
+        // One worker owns connection/reconnection; HID enumeration must not block the UI.
+        var ct = _cts.Token;
+        _ = Task.Run(() => ReadLoopAsync(ct), ct);
     }
 
-    private async Task TryConnectAsync()
+    private void TryConnect()
     {
-        if (_device != null) return;
+        if (_disposed || _device != null) return;
 
         try
         {
-            var devices = HidDevices.Enumerate(SonyVid, DualSensePid).ToList();
+            var devices = HidDevices.Enumerate(SonyVid, DualSensePid)
+                .Where(d => d.Capabilities.InputReportByteLength == 64
+                    && d.Capabilities.UsagePage == 0x0001 && d.Capabilities.Usage == 0x0005)
+                .ToList();
+            if (_disposed) return;
             if (devices.Count == 0)
             {
                 ConnectionChanged?.Invoke(false);
                 return;
             }
 
-            _device = devices.FirstOrDefault(d =>
-                d.Capabilities.UsagePage == 0x0001 && d.Capabilities.Usage == 0x0005)
-                ?? devices[0];
+            _device = devices[0];
 
             _device.OpenDevice();
 
-            if (!_device.IsConnected)
+            if (_disposed || !_device.IsConnected)
             {
+                _device.CloseDevice();
                 _device = null;
-                ConnectionChanged?.Invoke(false);
+                if (!_disposed) ConnectionChanged?.Invoke(false);
                 return;
             }
 
-            _retryCount = 0;
             ConnectionChanged?.Invoke(true);
         }
         catch
         {
-            _device = null;
-            ConnectionChanged?.Invoke(false);
-            if (++_retryCount >= 3) return;
-            await Task.Delay(2000);
-            await TryConnectAsync();
+            DisconnectDevice(); // The next polling cycle retries without a second connection worker.
         }
     }
 
@@ -72,15 +71,18 @@ public class HidService : IDisposable
             try { await Task.Delay(Math.Max(AppSettings.Instance.PollingIntervalMs, 50), ct); }
             catch (OperationCanceledException) { return; }
 
-            if (_device == null) { await TryConnectAsync(); continue; }
+            if (_device == null) { TryConnect(); continue; }
             if (!_device.IsConnected) { DisconnectDevice(); continue; }
 
             try
             {
-                var report = await Task.Run(() => _device.ReadReport(100), ct);
-                if (report?.Data == null || report.Data.Length == 0) continue;
+                var hidDevice = _device;
+                var report = await Task.Run(() => hidDevice.ReadReport(100), ct);
+                if (ct.IsCancellationRequested) return;
+                if (report == null || report.ReadStatus != HidDeviceData.ReadStatus.Success
+                    || !report.Exists || report.Data.Length == 0) continue;
 
-                var device = BatteryParser.Parse(report.Data, _device.DevicePath);
+                var device = BatteryParser.Parse(report.ReportId, report.Data, hidDevice.DevicePath);
                 if (device != null)
                     BatteryDataReceived?.Invoke(device);
             }
@@ -93,8 +95,7 @@ public class HidService : IDisposable
     {
         _device?.CloseDevice();
         _device = null;
-        _retryCount = 0;
-        ConnectionChanged?.Invoke(false);
+        if (!_disposed) ConnectionChanged?.Invoke(false);
     }
 
     /// <summary>

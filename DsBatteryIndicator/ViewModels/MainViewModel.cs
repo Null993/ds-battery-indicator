@@ -29,6 +29,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     private string _trayTooltip = "DS 电池指示器";
     private Brush _accentColor = new SolidColorBrush(Color.FromRgb(0x66, 0x66, 0x66));
     private bool _isBlinking;
+    private bool _isConnected;
 
     public event PropertyChangedEventHandler? PropertyChanged;
     public event Action? BlinkRequested;
@@ -39,12 +40,25 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         _hidService = new HidService();
         _hidService.BatteryDataReceived += OnBatteryDataReceived;
         _hidService.ConnectionChanged += OnConnectionChanged;
-        _hidService.StartWatching();
 
         if (AppSettings.Instance.RtssEnabled)
         {
             _rtssService = new RtssService();
             _rtssService.Initialize();
+        }
+    }
+
+    // Start after the window and tray have subscribed, so startup connection events are not lost.
+    public void StartWatching() => _hidService.StartWatching();
+
+    public bool IsConnected
+    {
+        get => _isConnected;
+        private set
+        {
+            if (_isConnected == value) return;
+            _isConnected = value;
+            OnPropertyChanged();
         }
     }
 
@@ -161,8 +175,9 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
                     break;
 
                 case DeviceStatus.Charging:
+                case DeviceStatus.FullyCharged:
                     AccentColor = new SolidColorBrush(Color.FromRgb(0x4A, 0xDE, 0x80)); // 绿
-                    TrayTooltip = $"{Strings.AppName} — {Strings.Charging} {device.BatteryLevel}%";
+                    TrayTooltip = $"{Strings.AppName} — {(device.IsCharging ? Strings.Charging : Strings.FullyCharged)} {device.BatteryLevel}%";
                     StopBlinking();
                     StopLowBatteryRepeat();
                     break;
@@ -193,9 +208,12 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     {
         Application.Current.Dispatcher.Invoke(() =>
         {
+            IsConnected = connected;
             if (!connected)
             {
                 Status = DeviceStatus.Disconnected;
+                BatteryLevel = 0;
+                BatteryText = "——";
                 IsCharging = false;
                 TrayTooltip = $"{Strings.AppName} — {Strings.Disconnected}";
                 AccentColor = new SolidColorBrush(Color.FromRgb(0x66, 0x66, 0x66));

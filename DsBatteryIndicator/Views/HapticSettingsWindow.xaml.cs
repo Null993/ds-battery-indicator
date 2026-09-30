@@ -23,6 +23,7 @@ public partial class HapticSettingsWindow : Window
         InitLocalization();
 
         var cfg = AppSettings.Instance;
+        ChkAutoWindowVisibility.IsChecked = cfg.AutoWindowVisibility;
 
         // 加载配置值
         SliderIntensity.Value = cfg.HapticIntensity;
@@ -117,9 +118,12 @@ public partial class HapticSettingsWindow : Window
         BtnSave.Click += (s, e) =>
         {
             ApplyToConfig();
+            cfg.AutoWindowVisibility = ChkAutoWindowVisibility.IsChecked == true;
             cfg.Save();
-            if (Owner is MainWindow mw) mw.Opacity = cfg.WindowOpacity;
+            var ownerWindow = Owner as MainWindow;
+            if (ownerWindow != null) ownerWindow.Opacity = cfg.WindowOpacity;
             Close();
+            ownerWindow?.ApplyWindowVisibility();
         };
     }
 
@@ -178,6 +182,8 @@ public partial class HapticSettingsWindow : Window
     private void InitLocalization()
     {
         LblTitle.Text = Strings.HapticSettings;
+        ChkAutoWindowVisibility.Content = Strings.AutoWindowVisibility;
+        ChkAutoWindowVisibility.ToolTip = Strings.AutoWindowVisibilityHint;
         LblHapticIntensity.Text = Strings.HapticIntensity;
         LblHapticDuration.Text = Strings.HapticDuration;
         LblLightbarDuration.Text = Strings.LightbarDuration;

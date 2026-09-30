@@ -1,5 +1,9 @@
 # DS Battery Indicator
 
+Other Settings includes an optional automatic window visibility checkbox (off by default). On Save, the window follows USB controller connection state, including on startup. The tray can still override visibility until the next connection change. Turning the option off restores the manual visibility preference. Automatic display does not take foreground focus; detection follows the configured polling interval.
+
+DualSense's standard HID battery field reports coarse 10% bands, not exact percentages. This app displays each band's lower bound (20% means approximately 20–29%). Full charge displays 100% without a charging animation. Linux, SDL and pydualsense often display the band midpoint (25%); that is still an estimate. See [battery reading review](docs/battery-reading-review.md) for sources and verification steps.
+
 [中文](README.md)
 
 A Windows 10/11 desktop app that displays DualSense controller battery level via a floating overlay. Reads real-time battery data from USB HID reports with low-battery triple-channel alerts.
