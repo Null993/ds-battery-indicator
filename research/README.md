@@ -8,7 +8,7 @@
 dotnet run --project research/DualSenseProbe -c Release -- research/artifacts/captures/NEW_SESSION_NAME 10
 ```
 
-只选择一个普通 DualSense USB 游戏手柄接口（VID 054C，PID 0CE6，输入长度 64）；零个或多个设备会退出，不任意选取。仅枚举描述符能力、读取输入报告、发送已知 USB `GET_FEATURE 0x05/0x20`。工具未实现输出报告、SET_FEATURE、未知 ID 扫描、校准写入、配对和固件更新。允许采样时长 1–3600 秒；长采样会占用设备读句柄，应在确认实验条件后手动运行。
+只选择一个普通 DualSense USB 游戏手柄接口（VID 054C，PID 0CE6，输入长度 64）；零个或多个设备会退出，不任意选取。默认仅枚举描述符能力、读取输入报告、发送已知 USB `GET_FEATURE 0x05/0x20`。允许采样时长 1–3600 秒。显式 `--read-battery-voltage` 模式会用 SET_FEATURE 提交固定的 `80 04 03` 电压查询，再读 GET81；没有通用 SET/action 扫描、校准写入、配对或固件更新功能。
 
 每条记录包含 UTC 与单调时间、Report ID、含 ID 的长度和十六进制原始字节。`hashes.json` 记录文件 SHA-256。HidLibrary 的 Feature 读取成功只返回固定最大缓冲区长度，不能据此确认真实 USB 传输长度；日志明确标注逻辑期望长度与缓冲区长度。
 
@@ -38,7 +38,16 @@ python research/scan_firmware_containers.py research/artifacts/firmware
 dotnet run --project research/DualSenseProbe -c Release -- research/artifacts/captures/NEW_CHARGING_SESSION 10 --read-21-22
 ```
 
-调用映射只作离线候选索引，需人工验证控制流。容器扫描限制解压输出为 4 MiB，记录完整流与校验，不把随机魔数当作格式识别。采样可显式追加 GET_FEATURE 21/22；这两个 ID 在基线固件中已声明，但语义未知，响应只能作原始证据，不转为 V/I/W。所有模式都拒绝写入非空证据目录。后续首次尝试发现零个 USB 手柄，未实际发送这两个查询。
+调用映射只作离线候选索引，需人工验证控制流。容器扫描限制解压输出为 4 MiB，记录完整流与校验，不把随机魔数当作格式识别。采样可显式追加 GET_FEATURE 21/22；10 月 6 日已实测 GET21 失败，GET22 成功并包含硬件/固件元数据，不能转为 V/I/W。所有模式都拒绝写入非空证据目录。
+
+## 固定电压查询与查验
+
+```powershell
+dotnet run --project research/DualSenseProbe -c Release -- research/artifacts/captures/NEW_VOLTAGE_SESSION 180 --read-battery-voltage --read-21-22
+python research/analyze_voltage_captures.py research/artifacts/captures/NEW_VOLTAGE_SESSION --output research/artifacts/NEW_VOLTAGE_ANALYSIS.json
+```
+
+每两秒提交一次 ADC device4/action3 查询。只接受完成状态与设备/动作匹配的 64 字节缓冲，按已核查硬件测试项目定义解析小端 mV；保留所有请求、响应和 API 错误。第二个数值不当作电流。查询和解析均不计算精确 SOC 或充电 W；电压尚缺独立仪器校准。[10 月 6 日实验记录](../docs/research/dualsense/2026-10-06-voltage-query.md)提供来源和全部限制。离线脚本复核各会话哈希、统计电压和电量跨档事件；发现哈希不一致或无效电压响应时返回非零退出码。
 
 ## UI 回归与预览
 

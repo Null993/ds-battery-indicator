@@ -23,6 +23,26 @@ internal static class Program
         cfg.LowBatteryThreshold = 10;
         cfg.LowBatteryAlertEnabled = false;
         cfg.RtssEnabled = false;
+        var voltage = new byte[64];
+        voltage[0] = 0x81; voltage[1] = 4; voltage[2] = 3; voltage[3] = 2;
+        voltage[4] = 0x68; voltage[5] = 0x10; // 4200 mV, little endian
+        Check(DualSenseResearch.BatteryVoltageResponse.ParseMillivolts(voltage) == 4200,
+            "Voltage requires matching factory query and complete status");
+        voltage[6] = 0xFF; voltage[7] = 0xFF;
+        Check(DualSenseResearch.BatteryVoltageResponse.ParseMillivolts(voltage) == 4200,
+            "Second sensor word does not become current or alter voltage");
+        foreach (int offset in new[] { 0, 1, 2, 3 })
+        {
+            byte original = voltage[offset]; voltage[offset] = 0;
+            Check(DualSenseResearch.BatteryVoltageResponse.ParseMillivolts(voltage) == null,
+                $"Reject mismatched or pending voltage response field {offset}");
+            voltage[offset] = original;
+        }
+        Check(DualSenseResearch.BatteryVoltageResponse.ParseMillivolts(voltage.AsSpan(0, 8)) == null,
+            "Truncated voltage response is rejected");
+        voltage[4] = 0; voltage[5] = 0;
+        Check(DualSenseResearch.BatteryVoltageResponse.ParseMillivolts(voltage) == null,
+            "Implausible voltage is unavailable, not zero");
         Check(!JsonSerializer.Deserialize<AppSettings>("{}")!.AutoWindowVisibility,
             "Existing settings default to manual visibility");
         var saved = JsonSerializer.Serialize(new AppSettings { AutoWindowVisibility = true });

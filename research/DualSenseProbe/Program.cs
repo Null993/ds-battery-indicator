@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text.Json;
 using HidLibrary;
+using DualSenseResearch;
 
 internal static class Program
 {
@@ -10,13 +11,14 @@ internal static class Program
 
     private static int Main(string[] args)
     {
-        if (args.Length < 1 || args.Length > 3 || (args.Length == 3 && args[2] != "--read-21-22"))
+        if (args.Length < 1 || args.Length > 4 || args.Skip(2).Any(a => a != "--read-21-22" && a != "--read-battery-voltage"))
         {
-            Console.Error.WriteLine("Usage: DualSenseProbe OUTPUT_DIRECTORY [SECONDS=10, range 1..3600] [--read-21-22]");
+            Console.Error.WriteLine("Usage: DualSenseProbe OUTPUT_DIRECTORY [SECONDS=10, range 1..3600] [--read-21-22] [--read-battery-voltage]");
             return 2;
         }
         int seconds = args.Length >= 2 ? int.Parse(args[1]) : 10;
-        bool readDiagnosticFeatures = args.Length == 3;
+        bool readDiagnosticFeatures = args.Contains("--read-21-22");
+        bool readBatteryVoltage = args.Contains("--read-battery-voltage");
         if (seconds < 1 || seconds > 3600) throw new ArgumentOutOfRangeException(nameof(seconds));
         string output = Path.GetFullPath(args[0]);
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any())
@@ -29,6 +31,7 @@ internal static class Program
         {
             startedUtc = DateTimeOffset.UtcNow, requestedSeconds = seconds,
             plannedGetFeatureIds = readDiagnosticFeatures ? "05,20,21,22" : "05,20",
+            plannedBatteryVoltageQuery = readBatteryVoltage ? "SET_FEATURE 80 04 03 (+ zero padding), GET_FEATURE 81, every 2 seconds" : null,
             note = "Planned queries are not evidence of execution; check feature snapshots and process exit status."
         });
         var devices = HidDevices.Enumerate(0x054C, 0x0CE6)
@@ -56,8 +59,15 @@ internal static class Program
         var clock = Stopwatch.StartNew();
         using (var log = new StreamWriter(Path.Combine(output, "input-reports.jsonl"), false))
         {
+            double nextVoltageSeconds = 0;
+            int voltageQuery = 0;
             while (clock.Elapsed.TotalSeconds < seconds && device.IsConnected)
             {
+                if (readBatteryVoltage && clock.Elapsed.TotalSeconds >= nextVoltageSeconds)
+                {
+                    ReadBatteryVoltage(device, output, voltageQuery++);
+                    nextVoltageSeconds = clock.Elapsed.TotalSeconds + 2;
+                }
                 var report = device.ReadReport(100);
                 if (report.ReadStatus != HidDeviceData.ReadStatus.Success || !report.Exists)
                 {
@@ -93,16 +103,18 @@ internal static class Program
         Save(output, "hashes.json", files);
         Console.WriteLine($"Captured {samples} valid USB reports, {failures} failed reads. Artifacts: {output}");
         Console.WriteLine(readDiagnosticFeatures
-            ? "Only input reads, capability queries, and GET_FEATURE 0x05/0x20/0x21/0x22 were issued."
-            : "Only input reads, capability queries, and GET_FEATURE 0x05/0x20 were issued.");
+            ? "Issued input reads, capability queries, and GET_FEATURE 0x05/0x20/0x21/0x22."
+            : "Issued input reads, capability queries, and GET_FEATURE 0x05/0x20.");
+        if (readBatteryVoltage)
+            Console.WriteLine("Additionally submitted fixed battery-voltage query 80 04 03 and read 81; no charging control or calibration commands.");
         return samples > 0 ? 0 : 4;
     }
 
     private static void ReadKnownFeatures(HidDevice device, string output, string phase, bool readDiagnosticFeatures)
     {
         // USB only. Known calibration and firmware-info queries used by Linux/SDL.
-        // Optional 21/22 are advertised on the connected USB firmware. Semantics unverified.
-        // No ID sweep, SET_FEATURE, output report, pairing, or firmware update commands.
+        // Optional 21/22 are advertised on the connected USB firmware; 22 includes HW/FW metadata.
+        // This method issues only GET_FEATURE; voltage-query mode separately submits fixed 80 04 03.
         foreach (byte id in readDiagnosticFeatures ? new byte[] { 0x05, 0x20, 0x21, 0x22 } : new byte[] { 0x05, 0x20 })
         {
             bool ok = device.ReadFeatureData(out byte[] data, id);
@@ -114,6 +126,46 @@ internal static class Program
                 note = "HidLibrary uses FeatureReportByteLength buffer; success does not expose actual transfer length."
             });
         }
+    }
+
+    private static void ReadBatteryVoltage(HidDevice device, string output, int index)
+    {
+        // Opt-in query only; there is deliberately no generic device/action parameter.
+        var request = new byte[64];
+        request[0] = 0x80;
+        request[1] = 4;
+        request[2] = 3;
+        DateTimeOffset started = DateTimeOffset.UtcNow;
+        bool sent = HidD_SetFeature(device.WriteHandle, request, request.Length);
+        int sendError = sent ? 0 : Marshal.GetLastWin32Error();
+        var attempts = new List<object>();
+        int? millivolts = null;
+        var timer = Stopwatch.StartNew();
+        if (sent)
+        {
+            for (int attempt = 0; attempt < 25 && timer.ElapsedMilliseconds < 1000; attempt++)
+            {
+                var response = new byte[64];
+                response[0] = 0x81;
+                bool received = HidD_GetFeature(device.ReadHandle, response, response.Length);
+                int error = received ? 0 : Marshal.GetLastWin32Error();
+                millivolts = received ? BatteryVoltageResponse.ParseMillivolts(response) : null;
+                attempts.Add(new { utc = DateTimeOffset.UtcNow, elapsedMs = timer.Elapsed.TotalMilliseconds,
+                    success = received, win32Error = error, hex = Convert.ToHexString(response), millivolts });
+                // Complete but implausible, unexpected paged data, or API failure: do not reinterpret or retry command.
+                if (!received || millivolts.HasValue || (response[1] == 4 && response[2] == 3 && response[3] >= 2)) break;
+                Thread.Sleep(10);
+            }
+        }
+        Save(output, $"battery-voltage-{index:D4}.json", new
+        {
+            startedUtc = started, finishedUtc = DateTimeOffset.UtcNow,
+            requestHex = Convert.ToHexString(request), sendSuccess = sent, sendWin32Error = sendError,
+            attempts, millivolts,
+            source = "daidr/dualsense-tester 62dce1703a468a20af901db5e31e476ce5ec24b3 ds.util.ts getBatteryVoltage",
+            limitation = "Voltage query only. No verified current, exact SOC or battery charging watts. Fixed API buffer does not establish transfer length."
+        });
+        Console.WriteLine($"Battery-voltage query {index}: {(millivolts.HasValue ? $"{millivolts} mV" : "unavailable")}");
     }
 
     private static object ReadDescriptorCapabilities(HidDevice device)
@@ -162,6 +214,12 @@ internal static class Program
     private static void Save(string output, string name, object value) =>
         File.WriteAllText(Path.Combine(output, name), JsonSerializer.Serialize(value, Json));
 
+    [DllImport("hid.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.U1)]
+    private static extern bool HidD_SetFeature(IntPtr handle, byte[] data, int length);
+    [DllImport("hid.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.U1)]
+    private static extern bool HidD_GetFeature(IntPtr handle, [In, Out] byte[] data, int length);
     [DllImport("hid.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.U1)]
     private static extern bool HidD_GetPreparsedData(IntPtr handle, out IntPtr data);

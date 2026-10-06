@@ -7,6 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../research/DualSenseProbe/BatteryVoltageResponse.cs" Link="BatteryVoltageResponse.cs" />
     <ProjectReference Include="../../DsBatteryIndicator/DsBatteryIndicator.csproj" />
   </ItemGroup>
 </Project>

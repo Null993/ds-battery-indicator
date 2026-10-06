@@ -1,0 +1,254 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/DualSenseClient/VIIPER/5904692ec54e7c34e051eb39c3ddfe3737a8397c/docs/devices/dualsense.md",
+    "sha256": "79587D29872F2055CF685F26D74E9A1B3AAB3B1ECB595305A5F1D4325BE66CB2",
+    "repo": "DualSenseClient/VIIPER",
+    "localFile": "DualSenseClient__VIIPER__docs__devices__dualsense.md",
+    "commit": "5904692ec54e7c34e051eb39c3ddfe3737a8397c",
+    "retrievedUtc": "2026-10-06T20:35:58.9819371+08:00",
+    "path": "docs/devices/dualsense.md"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/ShadowByteOS/dualsense-ps5-usb-research/1cd7c7c70a9e436292724a3caefc245222567cad/FINDINGS.md",
+    "sha256": "A74B09AA3851B00DDFF75397A174EB2809223FA21F8AB30314E45D3BA788D173",
+    "repo": "ShadowByteOS/dualsense-ps5-usb-research",
+    "localFile": "ShadowByteOS__dualsense-ps5-usb-research__FINDINGS.md",
+    "commit": "1cd7c7c70a9e436292724a3caefc245222567cad",
+    "retrievedUtc": "2026-10-06T20:36:01.2312813+08:00",
+    "path": "FINDINGS.md"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/RogueByteOfficial/DualSense_Pro_Repair_Suite/aebb828b0adfb2434b0ca095a205ad61acda42d6/DOCUMENTATION.md",
+    "sha256": "5E84A9AB509E2D5F236E6B0F79EA38CD9937045033A3AC68BAB3F4074BBED409",
+    "repo": "RogueByteOfficial/DualSense_Pro_Repair_Suite",
+    "localFile": "RogueByteOfficial__DualSense_Pro_Repair_Suite__DOCUMENTATION.md",
+    "commit": "aebb828b0adfb2434b0ca095a205ad61acda42d6",
+    "retrievedUtc": "2026-10-06T20:36:02.7978553+08:00",
+    "path": "DOCUMENTATION.md"
+  },
+  {
+    "commit": "5904692ec54e7c34e051eb39c3ddfe3737a8397c",
+    "path": "device/dualsense/ds_handler.go",
+    "repo": "DualSenseClient/VIIPER",
+    "sha256": "55386AAA46362A27CAEC31D17E1DFB655A7E901B33E1B2E3F15A4B6F648DBAF2",
+    "retrievedUtc": "2026-10-06T20:36:55.8373917+08:00",
+    "localFile": "DualSenseClient__VIIPER__device__dualsense__ds_handler.go",
+    "url": "https://raw.githubusercontent.com/DualSenseClient/VIIPER/5904692ec54e7c34e051eb39c3ddfe3737a8397c/device/dualsense/ds_handler.go"
+  },
+  {
+    "commit": "5904692ec54e7c34e051eb39c3ddfe3737a8397c",
+    "path": "device/dualsense/state.go",
+    "repo": "DualSenseClient/VIIPER",
+    "sha256": "0B48FEB76B193956F724F0675A13DAF22484540C564459F87CDB3ED28CE73ACA",
+    "retrievedUtc": "2026-10-06T20:36:57.3094017+08:00",
+    "localFile": "DualSenseClient__VIIPER__device__dualsense__state.go",
+    "url": "https://raw.githubusercontent.com/DualSenseClient/VIIPER/5904692ec54e7c34e051eb39c3ddfe3737a8397c/device/dualsense/state.go"
+  },
+  {
+    "commit": "5904692ec54e7c34e051eb39c3ddfe3737a8397c",
+    "path": "device/dualsense/feature_test.go",
+    "repo": "DualSenseClient/VIIPER",
+    "sha256": "BF175F3FE7743DA9A2FCE012F0AD4E48770A4F8E69984A50D6813E08AFA64C96",
+    "retrievedUtc": "2026-10-06T20:36:58.7548006+08:00",
+    "localFile": "DualSenseClient__VIIPER__device__dualsense__feature_test.go",
+    "url": "https://raw.githubusercontent.com/DualSenseClient/VIIPER/5904692ec54e7c34e051eb39c3ddfe3737a8397c/device/dualsense/feature_test.go"
+  },
+  {
+    "commit": "5904692ec54e7c34e051eb39c3ddfe3737a8397c",
+    "path": "device/dualsense/device.go",
+    "repo": "DualSenseClient/VIIPER",
+    "sha256": "61B3E9345642AAC25859E8540DCE84C69B94723648767650FA0B82869B48364B",
+    "retrievedUtc": "2026-10-06T20:37:00.46778+08:00",
+    "localFile": "DualSenseClient__VIIPER__device__dualsense__device.go",
+    "url": "https://raw.githubusercontent.com/DualSenseClient/VIIPER/5904692ec54e7c34e051eb39c3ddfe3737a8397c/device/dualsense/device.go"
+  },
+  {
+    "commit": "62dce1703a468a20af901db5e31e476ce5ec24b3",
+    "path": "src/router/DualSense/views/_ConnectPanel/DiagnosticsInfo.vue",
+    "repo": "daidr/dualsense-tester",
+    "sha256": "CAC541D2CCF8FCE05343FFAC266487C8287EB9B6F09566379471EA55D687EE13",
+    "retrievedUtc": "2026-10-06T20:37:01.8286188+08:00",
+    "localFile": "daidr__dualsense-tester__src__router__DualSense__views___ConnectPanel__DiagnosticsInfo.vue",
+    "url": "https://raw.githubusercontent.com/daidr/dualsense-tester/62dce1703a468a20af901db5e31e476ce5ec24b3/src/router/DualSense/views/_ConnectPanel/DiagnosticsInfo.vue"
+  },
+  {
+    "commit": "62dce1703a468a20af901db5e31e476ce5ec24b3",
+    "path": "src/router/DualSense/views/_ConnectPanel/InputInfo.vue",
+    "repo": "daidr/dualsense-tester",
+    "sha256": "2CD47B979E835E2D8D1EB52D5A2A03303F04B8D69B8978E0D6B65C9B86ECCBCA",
+    "retrievedUtc": "2026-10-06T20:37:03.4605672+08:00",
+    "localFile": "daidr__dualsense-tester__src__router__DualSense__views___ConnectPanel__InputInfo.vue",
+    "url": "https://raw.githubusercontent.com/daidr/dualsense-tester/62dce1703a468a20af901db5e31e476ce5ec24b3/src/router/DualSense/views/_ConnectPanel/InputInfo.vue"
+  },
+  {
+    "commit": "62dce1703a468a20af901db5e31e476ce5ec24b3",
+    "path": "src/utils/hid.util.ts",
+    "repo": "daidr/dualsense-tester",
+    "sha256": "F47FEF4ABB950774300ABB43A3E9D2844CC9EA25476226B5BE4D173B7F8C38FC",
+    "retrievedUtc": "2026-10-06T20:37:04.9709532+08:00",
+    "localFile": "daidr__dualsense-tester__src__utils__hid.util.ts",
+    "url": "https://raw.githubusercontent.com/daidr/dualsense-tester/62dce1703a468a20af901db5e31e476ce5ec24b3/src/utils/hid.util.ts"
+  },
+  {
+    "path": "device/dualsense/const.go",
+    "retrievedUtc": "2026-10-06T20:37:56.9184575+08:00",
+    "repo": "DualSenseClient/VIIPER",
+    "sha256": "BFD98A2AF913AFBE4C30737E86EA5C6F4DFC7A02AB7F598388011E2C96800E96",
+    "commit": "5904692ec54e7c34e051eb39c3ddfe3737a8397c",
+    "url": "https://raw.githubusercontent.com/DualSenseClient/VIIPER/5904692ec54e7c34e051eb39c3ddfe3737a8397c/device/dualsense/const.go",
+    "localFile": "DualSenseClient__VIIPER__device__dualsense__const.go"
+  },
+  {
+    "path": "src/utils/dualsense/ds.util.ts",
+    "retrievedUtc": "2026-10-06T20:37:58.7417725+08:00",
+    "repo": "daidr/dualsense-tester",
+    "sha256": "D89E17733685ADEFE1BAB2870BC5DB63D8D2D8B65934DD1EA142BF7994947937",
+    "commit": "62dce1703a468a20af901db5e31e476ce5ec24b3",
+    "url": "https://raw.githubusercontent.com/daidr/dualsense-tester/62dce1703a468a20af901db5e31e476ce5ec24b3/src/utils/dualsense/ds.util.ts",
+    "localFile": "daidr__dualsense-tester__src__utils__dualsense__ds.util.ts"
+  },
+  {
+    "path": "src/utils/dualsense/ds.type.ts",
+    "retrievedUtc": "2026-10-06T20:38:00.7776605+08:00",
+    "repo": "daidr/dualsense-tester",
+    "sha256": "E70FEDE8B49A21081BFEFE142CDF0EEF96101DE2D84EA84F0F1D3ECA4545846F",
+    "commit": "62dce1703a468a20af901db5e31e476ce5ec24b3",
+    "url": "https://raw.githubusercontent.com/daidr/dualsense-tester/62dce1703a468a20af901db5e31e476ce5ec24b3/src/utils/dualsense/ds.type.ts",
+    "localFile": "daidr__dualsense-tester__src__utils__dualsense__ds.type.ts"
+  },
+  {
+    "path": "src/utils/decoder.util.ts",
+    "retrievedUtc": "2026-10-06T20:38:03.5368847+08:00",
+    "repo": "daidr/dualsense-tester",
+    "sha256": "D47C4D651DFC0A09FD7ED819C676F051547FF35F7AF6F4E6EFA7FC065BBF0B7A",
+    "commit": "62dce1703a468a20af901db5e31e476ce5ec24b3",
+    "url": "https://raw.githubusercontent.com/daidr/dualsense-tester/62dce1703a468a20af901db5e31e476ce5ec24b3/src/utils/decoder.util.ts",
+    "localFile": "daidr__dualsense-tester__src__utils__decoder.util.ts"
+  },
+  {
+    "repo": "daidr/dualsense-tester",
+    "commit": "62dce1703a468a20af901db5e31e476ce5ec24b3",
+    "path": "src/utils/dualsense/telemetry.util.ts",
+    "url": "https://raw.githubusercontent.com/daidr/dualsense-tester/62dce1703a468a20af901db5e31e476ce5ec24b3/src/utils/dualsense/telemetry.util.ts",
+    "localFile": "daidr__dualsense-tester__src__utils__dualsense__telemetry.util.ts",
+    "sha256": "E0FA0982559A92B7F02255B1FDEFE508B24BD18C701AED6E83CE681F0154EB6D",
+    "retrievedUtc": "2026-10-06T20:44:44.7119285+08:00"
+  },
+  {
+    "repo": "daidr/dualsense-tester",
+    "commit": "62dce1703a468a20af901db5e31e476ce5ec24b3",
+    "path": "src/components/common/TelemetryView.vue",
+    "url": "https://raw.githubusercontent.com/daidr/dualsense-tester/62dce1703a468a20af901db5e31e476ce5ec24b3/src/components/common/TelemetryView.vue",
+    "localFile": "daidr__dualsense-tester__src__components__common__TelemetryView.vue",
+    "sha256": "7719DB5ECE47C3ED0109AFE9D7E5E0558DD4F7D6888D708428C53F5302C9CBE2",
+    "retrievedUtc": "2026-10-06T20:44:48.6002184+08:00"
+  },
+  {
+    "repo": "matiaspalmac/everything-imu",
+    "commit": "8af3a268f618d646f6e280bcd16226854b6bda76",
+    "path": "DEVICES.md",
+    "url": "https://raw.githubusercontent.com/matiaspalmac/everything-imu/8af3a268f618d646f6e280bcd16226854b6bda76/DEVICES.md",
+    "localFile": "matiaspalmac__everything-imu__DEVICES.md",
+    "sha256": "2E0ED83444E2DFCA0F7073D0815EFD9723F37FD4114CA1BE633952D3ADBEFDFA",
+    "retrievedUtc": "2026-10-06T20:47:18.3667305+08:00"
+  },
+  {
+    "repo": "matiaspalmac/everything-imu",
+    "commit": "8af3a268f618d646f6e280bcd16226854b6bda76",
+    "path": "crates/device-dualsense/src/factory.rs",
+    "url": "https://raw.githubusercontent.com/matiaspalmac/everything-imu/8af3a268f618d646f6e280bcd16226854b6bda76/crates/device-dualsense/src/factory.rs",
+    "localFile": "matiaspalmac__everything-imu__crates__device-dualsense__src__factory.rs",
+    "sha256": "1914884B73446AE336610392D15C367D46440EBF478E82E0639F403C18014070",
+    "retrievedUtc": "2026-10-06T20:47:20.6614111+08:00"
+  },
+  {
+    "repo": "matiaspalmac/everything-imu",
+    "commit": "8af3a268f618d646f6e280bcd16226854b6bda76",
+    "path": "crates/device-dualsense/src/report.rs",
+    "url": "https://raw.githubusercontent.com/matiaspalmac/everything-imu/8af3a268f618d646f6e280bcd16226854b6bda76/crates/device-dualsense/src/report.rs",
+    "localFile": "matiaspalmac__everything-imu__crates__device-dualsense__src__report.rs",
+    "sha256": "AE4D4A8409FC64ACC3BD4AA843789919609D07DB2032CD22DF7C67F7943D0FCD",
+    "retrievedUtc": "2026-10-06T20:47:22.0401055+08:00"
+  },
+  {
+    "repo": "matiaspalmac/everything-imu",
+    "commit": "8af3a268f618d646f6e280bcd16226854b6bda76",
+    "path": "crates/device-dualsense/src/diagnostics.rs",
+    "url": "https://raw.githubusercontent.com/matiaspalmac/everything-imu/8af3a268f618d646f6e280bcd16226854b6bda76/crates/device-dualsense/src/diagnostics.rs",
+    "localFile": "matiaspalmac__everything-imu__crates__device-dualsense__src__diagnostics.rs",
+    "sha256": "91CB614209DE44B2D3B828DA62B03171F428BB371B2131F32C4333C9F340AE95",
+    "retrievedUtc": "2026-10-06T20:47:23.8658371+08:00"
+  },
+  {
+    "repo": "Squibs/DualSense-Padhack",
+    "commit": "49188fbfd56ff3d8c324ff9ab2724943c34a572b",
+    "path": "README.md",
+    "url": "https://raw.githubusercontent.com/Squibs/DualSense-Padhack/49188fbfd56ff3d8c324ff9ab2724943c34a572b/README.md",
+    "localFile": "Squibs__DualSense-Padhack__README.md",
+    "sha256": "0C41E7A314B599BC7BCF85B59A134AFB406AB6F878A0C208C5019C53A304F924",
+    "retrievedUtc": "2026-10-06T20:47:25.5956405+08:00"
+  },
+  {
+    "repo": "RogueByteOfficial/RogueByte-PS5-Controller-Lab",
+    "commit": "5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22",
+    "path": "README.md",
+    "url": "https://raw.githubusercontent.com/RogueByteOfficial/RogueByte-PS5-Controller-Lab/5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22/README.md",
+    "localFile": "RogueByteOfficial__RogueByte-PS5-Controller-Lab__README.md",
+    "sha256": "7F76A94DC22A6673D2BC88C0A148F712A34FF54BFD49688A4B54145A40E5EA85",
+    "retrievedUtc": "2026-10-06T20:47:27.3826201+08:00"
+  },
+  {
+    "repo": "RogueByteOfficial/RogueByte-PS5-Controller-Lab",
+    "commit": "5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22",
+    "path": "src/triggers/trigger_adaptive.h",
+    "url": "https://raw.githubusercontent.com/RogueByteOfficial/RogueByte-PS5-Controller-Lab/5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22/src/triggers/trigger_adaptive.h",
+    "localFile": "RogueByteOfficial__RogueByte-PS5-Controller-Lab__src__triggers__trigger_adaptive.h",
+    "sha256": "928F068A825F9D02A5AFDAE4B7BA3C08B9746963379E9BFEEF24B5CF4D2EFEF1",
+    "retrievedUtc": "2026-10-06T20:48:37.9595732+08:00"
+  },
+  {
+    "repo": "RogueByteOfficial/RogueByte-PS5-Controller-Lab",
+    "commit": "5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22",
+    "path": "src/reports/reports_ps5.h",
+    "url": "https://raw.githubusercontent.com/RogueByteOfficial/RogueByte-PS5-Controller-Lab/5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22/src/reports/reports_ps5.h",
+    "localFile": "RogueByteOfficial__RogueByte-PS5-Controller-Lab__src__reports__reports_ps5.h",
+    "sha256": "3F6153B83667F9B65C556BCB78A20FF5271F6CA819344C1B9371A6E689784A98",
+    "retrievedUtc": "2026-10-06T20:48:39.8788173+08:00"
+  },
+  {
+    "repo": "RogueByteOfficial/RogueByte-PS5-Controller-Lab",
+    "commit": "5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22",
+    "path": "src/diagnostics/diagnostics.h",
+    "url": "https://raw.githubusercontent.com/RogueByteOfficial/RogueByte-PS5-Controller-Lab/5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22/src/diagnostics/diagnostics.h",
+    "localFile": "RogueByteOfficial__RogueByte-PS5-Controller-Lab__src__diagnostics__diagnostics.h",
+    "sha256": "861624EED80E1D8A37D8E9FDC2B2327D6EAE46E018F97B5DB86DA84EC309C6D4",
+    "retrievedUtc": "2026-10-06T20:48:41.0742626+08:00"
+  },
+  {
+    "repo": "RogueByteOfficial/RogueByte-PS5-Controller-Lab",
+    "commit": "5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22",
+    "path": "src/triggers/trigger_adaptive.c",
+    "url": "https://raw.githubusercontent.com/RogueByteOfficial/RogueByte-PS5-Controller-Lab/5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22/src/triggers/trigger_adaptive.c",
+    "localFile": "RogueByteOfficial__RogueByte-PS5-Controller-Lab__src__triggers__trigger_adaptive.c",
+    "sha256": "E75D5A87058FAA9A84C068F05B926A52559509303F8B773394716F4C1FED0DAD",
+    "retrievedUtc": "2026-10-06T12:49:25.8456914+00:00"
+  },
+  {
+    "repo": "RogueByteOfficial/RogueByte-PS5-Controller-Lab",
+    "commit": "5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22",
+    "path": "src/controller/controller.c",
+    "url": "https://raw.githubusercontent.com/RogueByteOfficial/RogueByte-PS5-Controller-Lab/5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22/src/controller/controller.c",
+    "localFile": "RogueByteOfficial__RogueByte-PS5-Controller-Lab__src__controller__controller.c",
+    "sha256": "D5E6B845E09627C3AC6BD1074886393A57B3CB8B1D2BAFEC02CD97D59C50965B",
+    "retrievedUtc": "2026-10-06T12:49:27.0257052+00:00"
+  },
+  {
+    "repo": "RogueByteOfficial/RogueByte-PS5-Controller-Lab",
+    "commit": "5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22",
+    "path": "src/hid/hid_info.c",
+    "url": "https://raw.githubusercontent.com/RogueByteOfficial/RogueByte-PS5-Controller-Lab/5f4ecc7ee7de18854cefc99ecb1ea97b01f3dd22/src/hid/hid_info.c",
+    "localFile": "RogueByteOfficial__RogueByte-PS5-Controller-Lab__src__hid__hid_info.c",
+    "sha256": "0130C6E14A4A10FF3DA7FD8743F377C3B8C4341DFF88E7BDBBC06E651B4FB28A",
+    "retrievedUtc": "2026-10-06T12:49:28.3205442+00:00"
+  }
+]

@@ -1,0 +1,173 @@
+{
+  "sessions": [
+    {
+      "session": "2026-10-06-read-21-22",
+      "samples": 1334,
+      "failedReads": 0,
+      "actualSeconds": 10.0151294,
+      "hashMismatches": [],
+      "batteryStatusByteCounts": {
+        "0x17": 1334
+      },
+      "transitions": [
+        {
+          "utc": "2026-10-06T12:33:07.1121565+00:00",
+          "elapsedMs": 9.7737,
+          "batteryStatusHex": "17"
+        }
+      ],
+      "voltageQueryCount": 0,
+      "validVoltageReadings": 0,
+      "invalidVoltageFiles": [],
+      "firstVoltage": null,
+      "lastVoltage": null,
+      "minMillivolts": null,
+      "maxMillivolts": null,
+      "distinctMillivolts": 0,
+      "secondWordRawRange": null,
+      "features": [
+        {
+          "reportId": 5,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "sameData": true
+        },
+        {
+          "reportId": 32,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "sameData": true
+        },
+        {
+          "reportId": 33,
+          "beforeSuccess": false,
+          "afterSuccess": false,
+          "sameData": null
+        },
+        {
+          "reportId": 34,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "sameData": true
+        }
+      ]
+    },
+    {
+      "session": "2026-10-06-battery-voltage",
+      "samples": 1610,
+      "failedReads": 0,
+      "actualSeconds": 12.0086535,
+      "hashMismatches": [],
+      "batteryStatusByteCounts": {
+        "0x18": 1610
+      },
+      "transitions": [
+        {
+          "utc": "2026-10-06T12:42:59.8937109+00:00",
+          "elapsedMs": 22.5363,
+          "batteryStatusHex": "18"
+        }
+      ],
+      "voltageQueryCount": 6,
+      "validVoltageReadings": 6,
+      "invalidVoltageFiles": [],
+      "firstVoltage": {
+        "utc": "2026-10-06T12:42:59.8829878+00:00",
+        "millivolts": 3720
+      },
+      "lastVoltage": {
+        "utc": "2026-10-06T12:43:09.9396378+00:00",
+        "millivolts": 3720
+      },
+      "minMillivolts": 3719,
+      "maxMillivolts": 3721,
+      "distinctMillivolts": 3,
+      "secondWordRawRange": [
+        1847,
+        1848
+      ],
+      "features": [
+        {
+          "reportId": 5,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "sameData": true
+        },
+        {
+          "reportId": 32,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "sameData": true
+        }
+      ]
+    },
+    {
+      "session": "2026-10-06-battery-voltage-long",
+      "samples": 23269,
+      "failedReads": 0,
+      "actualSeconds": 180.0120101,
+      "hashMismatches": [],
+      "batteryStatusByteCounts": {
+        "0x18": 20534,
+        "0x19": 2735
+      },
+      "transitions": [
+        {
+          "utc": "2026-10-06T12:45:40.2027686+00:00",
+          "elapsedMs": 27.6524,
+          "batteryStatusHex": "18"
+        },
+        {
+          "utc": "2026-10-06T12:48:19.0300915+00:00",
+          "elapsedMs": 158854.9747,
+          "batteryStatusHex": "19"
+        }
+      ],
+      "voltageQueryCount": 90,
+      "validVoltageReadings": 90,
+      "invalidVoltageFiles": [],
+      "firstVoltage": {
+        "utc": "2026-10-06T12:45:40.1885068+00:00",
+        "millivolts": 3745
+      },
+      "lastVoltage": {
+        "utc": "2026-10-06T12:48:39.0189302+00:00",
+        "millivolts": 3774
+      },
+      "minMillivolts": 3745,
+      "maxMillivolts": 3775,
+      "distinctMillivolts": 31,
+      "secondWordRawRange": [
+        1838,
+        1843
+      ],
+      "features": [
+        {
+          "reportId": 5,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "sameData": true
+        },
+        {
+          "reportId": 32,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "sameData": true
+        },
+        {
+          "reportId": 33,
+          "beforeSuccess": false,
+          "afterSuccess": false,
+          "sameData": null
+        },
+        {
+          "reportId": 34,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "sameData": true
+        }
+      ]
+    }
+  ],
+  "limitation": "Voltage units follow the cited hardware tester; no independent voltmeter calibration. Second word is not verified current. No exact SOC or watts derived."
+}
