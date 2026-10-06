@@ -1,0 +1,256 @@
+{
+  "sessions": [
+    {
+      "session": "2026-10-06-soc-followup-endpoint",
+      "samples": 793,
+      "failedReads": 0,
+      "actualSeconds": 6.006597,
+      "hashMismatches": [],
+      "batteryStatusByteCounts": {
+        "0x19": 793
+      },
+      "transitions": [
+        {
+          "utc": "2026-10-06T13:03:34.3348049+00:00",
+          "elapsedMs": 21.9198,
+          "batteryStatusHex": "19"
+        }
+      ],
+      "voltageQueryCount": 3,
+      "validVoltageReadings": 3,
+      "invalidVoltageFiles": [],
+      "firstVoltage": {
+        "utc": "2026-10-06T13:03:34.32443+00:00",
+        "millivolts": 3804
+      },
+      "lastVoltage": {
+        "utc": "2026-10-06T13:03:38.3462794+00:00",
+        "millivolts": 3804
+      },
+      "minMillivolts": 3804,
+      "maxMillivolts": 3804,
+      "distinctMillivolts": 1,
+      "secondWordRawRange": [
+        1949,
+        1949
+      ],
+      "features": [
+        {
+          "reportId": 5,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "beforeWin32Error": null,
+          "afterWin32Error": null,
+          "expectedLogicalBytes": 41,
+          "apiBufferBytes": 64,
+          "sameData": true
+        },
+        {
+          "reportId": 32,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "beforeWin32Error": null,
+          "afterWin32Error": null,
+          "expectedLogicalBytes": 64,
+          "apiBufferBytes": 64,
+          "sameData": true
+        }
+      ]
+    },
+    {
+      "session": "2026-10-06-extra-features",
+      "samples": 1524,
+      "failedReads": 0,
+      "actualSeconds": 12.0215639,
+      "hashMismatches": [],
+      "batteryStatusByteCounts": {
+        "0x19": 1524
+      },
+      "transitions": [
+        {
+          "utc": "2026-10-06T13:09:21.3996269+00:00",
+          "elapsedMs": 22.0601,
+          "batteryStatusHex": "19"
+        }
+      ],
+      "voltageQueryCount": 6,
+      "validVoltageReadings": 6,
+      "invalidVoltageFiles": [],
+      "firstVoltage": {
+        "utc": "2026-10-06T13:09:21.3888091+00:00",
+        "millivolts": 3809
+      },
+      "lastVoltage": {
+        "utc": "2026-10-06T13:09:31.445686+00:00",
+        "millivolts": 3809
+      },
+      "minMillivolts": 3808,
+      "maxMillivolts": 3809,
+      "distinctMillivolts": 2,
+      "secondWordRawRange": [
+        1987,
+        1988
+      ],
+      "features": [
+        {
+          "reportId": 5,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "beforeWin32Error": null,
+          "afterWin32Error": null,
+          "expectedLogicalBytes": 41,
+          "apiBufferBytes": 64,
+          "sameData": true
+        },
+        {
+          "reportId": 8,
+          "beforeSuccess": false,
+          "afterSuccess": false,
+          "beforeWin32Error": null,
+          "afterWin32Error": null,
+          "expectedLogicalBytes": 48,
+          "apiBufferBytes": 64,
+          "sameData": null
+        },
+        {
+          "reportId": 12,
+          "beforeSuccess": false,
+          "afterSuccess": false,
+          "beforeWin32Error": null,
+          "afterWin32Error": null,
+          "expectedLogicalBytes": 42,
+          "apiBufferBytes": 64,
+          "sameData": null
+        },
+        {
+          "reportId": 32,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "beforeWin32Error": null,
+          "afterWin32Error": null,
+          "expectedLogicalBytes": 64,
+          "apiBufferBytes": 64,
+          "sameData": true
+        },
+        {
+          "reportId": 33,
+          "beforeSuccess": false,
+          "afterSuccess": false,
+          "beforeWin32Error": null,
+          "afterWin32Error": null,
+          "expectedLogicalBytes": 5,
+          "apiBufferBytes": 64,
+          "sameData": null
+        },
+        {
+          "reportId": 34,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "beforeWin32Error": null,
+          "afterWin32Error": null,
+          "expectedLogicalBytes": 64,
+          "apiBufferBytes": 64,
+          "sameData": true
+        }
+      ]
+    },
+    {
+      "session": "2026-10-06-extra-features-errors",
+      "samples": 798,
+      "failedReads": 0,
+      "actualSeconds": 6.0215239,
+      "hashMismatches": [],
+      "batteryStatusByteCounts": {
+        "0x19": 798
+      },
+      "transitions": [
+        {
+          "utc": "2026-10-06T13:11:39.2651737+00:00",
+          "elapsedMs": 22.7913,
+          "batteryStatusHex": "19"
+        }
+      ],
+      "voltageQueryCount": 3,
+      "validVoltageReadings": 3,
+      "invalidVoltageFiles": [],
+      "firstVoltage": {
+        "utc": "2026-10-06T13:11:39.2536135+00:00",
+        "millivolts": 3815
+      },
+      "lastVoltage": {
+        "utc": "2026-10-06T13:11:43.2794484+00:00",
+        "millivolts": 3802
+      },
+      "minMillivolts": 3802,
+      "maxMillivolts": 3815,
+      "distinctMillivolts": 3,
+      "secondWordRawRange": [
+        1997,
+        1998
+      ],
+      "features": [
+        {
+          "reportId": 5,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "beforeWin32Error": 0,
+          "afterWin32Error": 0,
+          "expectedLogicalBytes": 41,
+          "apiBufferBytes": 64,
+          "sameData": true
+        },
+        {
+          "reportId": 8,
+          "beforeSuccess": false,
+          "afterSuccess": false,
+          "beforeWin32Error": 31,
+          "afterWin32Error": 31,
+          "expectedLogicalBytes": 48,
+          "apiBufferBytes": 64,
+          "sameData": null
+        },
+        {
+          "reportId": 12,
+          "beforeSuccess": false,
+          "afterSuccess": false,
+          "beforeWin32Error": 31,
+          "afterWin32Error": 31,
+          "expectedLogicalBytes": 42,
+          "apiBufferBytes": 64,
+          "sameData": null
+        },
+        {
+          "reportId": 32,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "beforeWin32Error": 0,
+          "afterWin32Error": 0,
+          "expectedLogicalBytes": 64,
+          "apiBufferBytes": 64,
+          "sameData": true
+        },
+        {
+          "reportId": 33,
+          "beforeSuccess": false,
+          "afterSuccess": false,
+          "beforeWin32Error": 31,
+          "afterWin32Error": 31,
+          "expectedLogicalBytes": 5,
+          "apiBufferBytes": 64,
+          "sameData": null
+        },
+        {
+          "reportId": 34,
+          "beforeSuccess": true,
+          "afterSuccess": true,
+          "beforeWin32Error": 0,
+          "afterWin32Error": 0,
+          "expectedLogicalBytes": 64,
+          "apiBufferBytes": 64,
+          "sameData": true
+        }
+      ]
+    }
+  ],
+  "limitation": "Voltage units follow the cited hardware tester; no independent voltmeter calibration. Second word is not verified current. No exact SOC or watts derived."
+}

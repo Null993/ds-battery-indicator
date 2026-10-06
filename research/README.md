@@ -10,7 +10,7 @@ dotnet run --project research/DualSenseProbe -c Release -- research/artifacts/ca
 
 只选择一个普通 DualSense USB 游戏手柄接口（VID 054C，PID 0CE6，输入长度 64）；零个或多个设备会退出，不任意选取。默认仅枚举描述符能力、读取输入报告、发送已知 USB `GET_FEATURE 0x05/0x20`。允许采样时长 1–3600 秒。显式 `--read-battery-voltage` 模式会用 SET_FEATURE 提交固定的 `80 04 03` 电压查询，再读 GET81；没有通用 SET/action 扫描、校准写入、配对或固件更新功能。
 
-每条记录包含 UTC 与单调时间、Report ID、含 ID 的长度和十六进制原始字节。`hashes.json` 记录文件 SHA-256。HidLibrary 的 Feature 读取成功只返回固定最大缓冲区长度，不能据此确认真实 USB 传输长度；日志明确标注逻辑期望长度与缓冲区长度。
+每条记录包含 UTC 与单调时间、Report ID、含 ID 的长度和十六进制原始字节。`hashes.json` 记录文件 SHA-256。Feature 使用 Windows `HidD_GetFeature` 与固定最大缓冲区，保存成功/失败及立即取得的 Win32 错误；不能据此确认真实 USB 传输长度。日志明确标注逻辑期望长度与缓冲区长度，失败 API 缓冲不作为有效响应。
 
 `descriptor-capabilities.json` 来自 Windows `HidP_GetValueCaps`，不是原始 USB report descriptor 转储；保存每个结构的 72 字节原始值以便重新解释。当前设备按钮能力不含额外 Feature ID（`NumberFeatureButtonCaps=0`）；工具只遍历 ValueCaps，不宣称覆盖任意设备的全部描述符元素。
 
@@ -39,6 +39,10 @@ dotnet run --project research/DualSenseProbe -c Release -- research/artifacts/ca
 ```
 
 调用映射只作离线候选索引，需人工验证控制流。容器扫描限制解压输出为 4 MiB，记录完整流与校验，不把随机魔数当作格式识别。采样可显式追加 GET_FEATURE 21/22；10 月 6 日已实测 GET21 失败，GET22 成功并包含硬件/固件元数据，不能转为 V/I/W。所有模式都拒绝写入非空证据目录。
+
+显式 `--read-extra-features` 只追加 GET08/0C，先验证本机声明的类型、bitSize、reportCount 与非 range 条件。本机两轮前后均失败，Windows 错误 31；没有把失败解释为“所有模式永远不可读”。见 [原装接口追加记录](../docs/research/dualsense/2026-10-06-stock-interface-followup.md)。
+
+`Test-PublicFirmwareKeys.ps1 -FirmwareFiles FILE1,FILE2 -Output NEW_JSON` 只离线测试两把公开 DS4 密钥、四个假设偏移，以 NIST CBC 首块作正例；不访问设备或执行输出。16 个假设没有得到可信明文，不能据此认为已解密 DualSense。
 
 ## 固定电压查询与查验
 

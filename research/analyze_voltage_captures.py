@@ -47,6 +47,10 @@ def analyze(session):
         after = json.loads(path.with_name(path.name.replace('-before', '-after')).read_text(encoding='utf-8-sig'))
         features.append({'reportId': before['reportId'], 'beforeSuccess': before['success'],
                          'afterSuccess': after['success'],
+                         'beforeWin32Error': before.get('win32Error'),
+                         'afterWin32Error': after.get('win32Error'),
+                         'expectedLogicalBytes': before.get('expectedLogicalBytes'),
+                         'apiBufferBytes': before.get('apiBufferBytes'),
                          'sameData': before['hex'] == after['hex'] if before['success'] and after['success'] else None})
     return {'session': session.name, 'samples': summary['samples'], 'failedReads': summary['failures'],
             'actualSeconds': summary['actualSeconds'], 'hashMismatches': mismatches,

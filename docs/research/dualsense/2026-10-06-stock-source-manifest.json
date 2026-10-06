@@ -1,0 +1,84 @@
+[
+  {
+    "repo": "eddeeh/dualsense-ps5-mitm",
+    "commit": "78445e3a9cc61b1840d807dc51cea03bc041e607",
+    "path": "src/dualsense/DualSense.h",
+    "url": "https://raw.githubusercontent.com/eddeeh/dualsense-ps5-mitm/78445e3a9cc61b1840d807dc51cea03bc041e607/src/dualsense/DualSense.h",
+    "localFile": "eddeeh__dualsense-ps5-mitm__src__dualsense__DualSense.h",
+    "success": true,
+    "sha256": "9EDF0A79C7DCC139B0C6F44247B04B6EE0FEC5DDE940158ED142CFBD1A7A70E2",
+    "retrievedUtc": "2026-10-06T21:06:32.6952947+08:00"
+  },
+  {
+    "repo": "eddeeh/dualsense-ps5-mitm",
+    "commit": "78445e3a9cc61b1840d807dc51cea03bc041e607",
+    "path": "src/input/InputView.cpp",
+    "url": "https://raw.githubusercontent.com/eddeeh/dualsense-ps5-mitm/78445e3a9cc61b1840d807dc51cea03bc041e607/src/input/InputView.cpp",
+    "localFile": "eddeeh__dualsense-ps5-mitm__src__input__InputView.cpp",
+    "success": true,
+    "sha256": "5750EB2676FEA95BAF14EFB23EDDEBE61D99B262F04E06D1D35A3344A9671601",
+    "retrievedUtc": "2026-10-06T21:06:35.3463376+08:00"
+  },
+  {
+    "repo": "SpecialKO/SpecialK",
+    "commit": "d0672a5499df62f0f23efdc81d87e0a0dc0c35bd",
+    "path": "src/input/hid_reports/playstation.cpp",
+    "url": "https://raw.githubusercontent.com/SpecialKO/SpecialK/d0672a5499df62f0f23efdc81d87e0a0dc0c35bd/src/input/hid_reports/playstation.cpp",
+    "localFile": "SpecialKO__SpecialK__src__input__hid_reports__playstation.cpp",
+    "success": true,
+    "sha256": "36F535E0339EA57DD197B697E96CD88CECE6B0810A7DC326CDC5247A5668FB97",
+    "retrievedUtc": "2026-10-06T21:06:39.5119865+08:00"
+  },
+  {
+    "repo": "Sufxx/dualsense-doctor",
+    "commit": "0f1d17546d5034b6bec8d74632073855d5cc4175",
+    "path": "mcp/hid/dualsense.js",
+    "url": "https://github.com/Sufxx/dualsense-doctor/blob/0f1d17546d5034b6bec8d74632073855d5cc4175/mcp/hid/dualsense.js",
+    "localFile": "Sufxx__dualsense-doctor__mcp__hid__dualsense.js",
+    "success": true,
+    "sha256": "577BC241BCF80349157C10287F4D0C987AF39D3184F68AC1E47C35F2BA8DF5C9",
+    "retrievedUtc": "2026-10-06T21:12:11.6278859+08:00"
+  },
+  {
+    "repo": "Sufxx/dualsense-doctor",
+    "commit": "0f1d17546d5034b6bec8d74632073855d5cc4175",
+    "path": "js/dualsense.js",
+    "url": "https://github.com/Sufxx/dualsense-doctor/blob/0f1d17546d5034b6bec8d74632073855d5cc4175/js/dualsense.js",
+    "localFile": "Sufxx__dualsense-doctor__js__dualsense.js",
+    "success": true,
+    "sha256": "E6CB2142E2997E5BDF93189B8729C242EF21DE0EAAA2B20888352F9730D87DBF",
+    "retrievedUtc": "2026-10-06T21:12:12.6179317+08:00"
+  },
+  {
+    "repo": "Sufxx/dualsense-doctor",
+    "commit": "0f1d17546d5034b6bec8d74632073855d5cc4175",
+    "path": "dsdoctor.py",
+    "url": "https://github.com/Sufxx/dualsense-doctor/blob/0f1d17546d5034b6bec8d74632073855d5cc4175/dsdoctor.py",
+    "localFile": "Sufxx__dualsense-doctor__dsdoctor.py",
+    "success": true,
+    "sha256": "6064D1CF7A068F53A0F0C2482A04E0959C6464F487C7910221E232B8425708A8",
+    "retrievedUtc": "2026-10-06T21:12:13.8633096+08:00"
+  },
+  {
+    "repo": "ps-iowned/ps-iowned",
+    "commit": "657fed485f450cc66fba4c026b61985a12ad1089",
+    "path": "README.md",
+    "url": "https://github.com/ps-iowned/ps-iowned/blob/657fed485f450cc66fba4c026b61985a12ad1089/README.md",
+    "localFile": "ps-iowned__README__657fed485f450cc66fba4c026b61985a12ad1089.md",
+    "success": true,
+    "sha256": "069B94EF7F3000F50F50C5B8B3DD80863175F54F3EADD4CF077F880D7EF33917",
+    "retrievalTimeRecorded": false,
+    "assessment": "PSIO accessory firmware; unrelated to DS4/DualSense"
+  },
+  {
+    "repo": "ConWan30/QorTroller",
+    "commit": "51d1ab3ff9fc31503ba556149cb69281971d68fa",
+    "path": "wiki/methodology/sensor_stack_v2_1_architectural_revision.md",
+    "url": "https://github.com/ConWan30/QorTroller/blob/51d1ab3ff9fc31503ba556149cb69281971d68fa/wiki/methodology/sensor_stack_v2_1_architectural_revision.md",
+    "localFile": "ConWan30__QorTroller__sensor_stack_v2_1_architectural_revision.md",
+    "success": true,
+    "sha256": "2E25C3A10AA9EF2DE9EA73B3CA502BABAE3526DE5E849E29AD6545CC3205BF7B",
+    "retrievalTimeRecorded": false,
+    "assessment": "Secondary synthesis; no voltage interface assertion contradicted by captured factory ADC query"
+  }
+]

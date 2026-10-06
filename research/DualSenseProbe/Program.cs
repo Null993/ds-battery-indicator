@@ -11,14 +11,18 @@ internal static class Program
 
     private static int Main(string[] args)
     {
-        if (args.Length < 1 || args.Length > 4 || args.Skip(2).Any(a => a != "--read-21-22" && a != "--read-battery-voltage"))
+        if (args.Length < 1 || args.Length > 5 || args.Skip(2).Any(a => a != "--read-21-22" && a != "--read-battery-voltage" && a != "--read-extra-features"))
         {
-            Console.Error.WriteLine("Usage: DualSenseProbe OUTPUT_DIRECTORY [SECONDS=10, range 1..3600] [--read-21-22] [--read-battery-voltage]");
+            Console.Error.WriteLine("Usage: DualSenseProbe OUTPUT_DIRECTORY [SECONDS=10, range 1..3600] [--read-21-22] [--read-battery-voltage] [--read-extra-features]");
             return 2;
         }
         int seconds = args.Length >= 2 ? int.Parse(args[1]) : 10;
         bool readDiagnosticFeatures = args.Contains("--read-21-22");
         bool readBatteryVoltage = args.Contains("--read-battery-voltage");
+        bool readExtraFeatures = args.Contains("--read-extra-features");
+        var featureIds = new List<byte> { 0x05, 0x20 };
+        if (readDiagnosticFeatures) featureIds.AddRange(new byte[] { 0x21, 0x22 });
+        if (readExtraFeatures) featureIds.AddRange(new byte[] { 0x08, 0x0C });
         if (seconds < 1 || seconds > 3600) throw new ArgumentOutOfRangeException(nameof(seconds));
         string output = Path.GetFullPath(args[0]);
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any())
@@ -30,7 +34,7 @@ internal static class Program
         Save(output, "session.json", new
         {
             startedUtc = DateTimeOffset.UtcNow, requestedSeconds = seconds,
-            plannedGetFeatureIds = readDiagnosticFeatures ? "05,20,21,22" : "05,20",
+            plannedGetFeatureIds = string.Join(",", featureIds.Select(id => id.ToString("X2"))),
             plannedBatteryVoltageQuery = readBatteryVoltage ? "SET_FEATURE 80 04 03 (+ zero padding), GET_FEATURE 81, every 2 seconds" : null,
             note = "Planned queries are not evidence of execution; check feature snapshots and process exit status."
         });
@@ -51,8 +55,18 @@ internal static class Program
         using var device = devices[0];
         device.OpenDevice();
         if (!device.IsOpen) throw new IOException("HID device could not be opened.");
-        Save(output, "descriptor-capabilities.json", ReadDescriptorCapabilities(device));
-        ReadKnownFeatures(device, output, "before", readDiagnosticFeatures);
+        var descriptor = ReadDescriptorCapabilities(device);
+        Save(output, "descriptor-capabilities.json", descriptor);
+        // New raw snapshots require an exact declaration on the connected device.
+        // An advertised report is not evidence that GET is implemented or its content is telemetry.
+        if (readExtraFeatures && !new byte[] { 0x08, 0x0C }.All(id => descriptor.Any(cap =>
+            cap.reportType == "feature" && cap.reportId == id && cap.bitSize == 8
+            && cap.reportCount == ExpectedLogicalBytes(id) - 1 && !cap.isRange)))
+        {
+            Console.Error.WriteLine("Feature 08/0C declarations do not match expected USB lengths. No feature or input queries issued.");
+            return 5;
+        }
+        ReadKnownFeatures(device, output, "before", featureIds);
         var sets = Enumerable.Range(0, 64).Select(_ => new HashSet<byte>()).ToArray();
         var counts = new Dictionary<string, int>();
         int samples = 0, failures = 0;
@@ -87,7 +101,7 @@ internal static class Program
                 counts[batteryByte] = counts.GetValueOrDefault(batteryByte) + 1;
             }
         }
-        ReadKnownFeatures(device, output, "after", readDiagnosticFeatures);
+        ReadKnownFeatures(device, output, "after", featureIds);
         Save(output, "summary.json", new
         {
             utc = DateTimeOffset.UtcNow, requestedSeconds = seconds,
@@ -102,28 +116,38 @@ internal static class Program
                 sha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(f))) }).ToArray();
         Save(output, "hashes.json", files);
         Console.WriteLine($"Captured {samples} valid USB reports, {failures} failed reads. Artifacts: {output}");
-        Console.WriteLine(readDiagnosticFeatures
-            ? "Issued input reads, capability queries, and GET_FEATURE 0x05/0x20/0x21/0x22."
-            : "Issued input reads, capability queries, and GET_FEATURE 0x05/0x20.");
+        Console.WriteLine($"Issued input reads, capability queries, and GET_FEATURE {string.Join("/", featureIds.Select(id => $"0x{id:X2}"))}.");
         if (readBatteryVoltage)
             Console.WriteLine("Additionally submitted fixed battery-voltage query 80 04 03 and read 81; no charging control or calibration commands.");
         return samples > 0 ? 0 : 4;
     }
 
-    private static void ReadKnownFeatures(HidDevice device, string output, string phase, bool readDiagnosticFeatures)
+    private static int ExpectedLogicalBytes(byte id) => id switch
+    {
+        0x05 => 41, 0x08 => 48, 0x0C => 42, 0x21 => 5, _ => 64
+    };
+
+    private static void ReadKnownFeatures(HidDevice device, string output, string phase, IEnumerable<byte> featureIds)
     {
         // USB only. Known calibration and firmware-info queries used by Linux/SDL.
         // Optional 21/22 are advertised on the connected USB firmware; 22 includes HW/FW metadata.
+        // Optional 08/0C are raw snapshots only; no payload meanings or units are assumed.
         // This method issues only GET_FEATURE; voltage-query mode separately submits fixed 80 04 03.
-        foreach (byte id in readDiagnosticFeatures ? new byte[] { 0x05, 0x20, 0x21, 0x22 } : new byte[] { 0x05, 0x20 })
+        foreach (byte id in featureIds)
         {
-            bool ok = device.ReadFeatureData(out byte[] data, id);
+            // Preserve the API buffer and immediate error even when a GET fails.
+            // This uses the descriptor's maximum Feature buffer, as required by HidD_GetFeature.
+            var data = new byte[device.Capabilities.FeatureReportByteLength];
+            data[0] = id;
+            bool ok = HidD_GetFeature(device.ReadHandle, data, data.Length);
+            int error = ok ? 0 : Marshal.GetLastWin32Error();
             Save(output, $"feature-{id:X2}-{phase}.json", new
             {
-                utc = DateTimeOffset.UtcNow, reportId = id, success = ok,
-                expectedLogicalBytes = id switch { 5 => 41, 0x21 => 5, _ => 64 },
-                apiBufferBytes = data?.Length ?? 0, hex = ok ? Convert.ToHexString(data!) : null,
-                note = "HidLibrary uses FeatureReportByteLength buffer; success does not expose actual transfer length."
+                utc = DateTimeOffset.UtcNow, reportId = id, success = ok, win32Error = error,
+                expectedLogicalBytes = ExpectedLogicalBytes(id),
+                apiBufferBytes = data.Length, hex = ok ? Convert.ToHexString(data) : null,
+                rawApiBufferHex = Convert.ToHexString(data),
+                note = "FeatureReportByteLength API buffer; transfer length is unknown. Failed-call buffer is not a valid device response."
             });
         }
     }
@@ -168,13 +192,17 @@ internal static class Program
         Console.WriteLine($"Battery-voltage query {index}: {(millivolts.HasValue ? $"{millivolts} mV" : "unavailable")}");
     }
 
-    private static object ReadDescriptorCapabilities(HidDevice device)
+    private sealed record DescriptorCapability(string reportType, ushort usagePage, byte reportId,
+        bool isRange, ushort bitSize, ushort reportCount, int logicalMin, int logicalMax,
+        ushort usageMinOrUsage, ushort usageMaxIfRange, string rawValueCapsHex);
+
+    private static List<DescriptorCapability> ReadDescriptorCapabilities(HidDevice device)
     {
         if (!HidD_GetPreparsedData(device.ReadHandle, out var preparsed))
             throw new IOException($"HidD_GetPreparsedData failed: {Marshal.GetLastWin32Error()}");
         try
         {
-            var result = new List<object>();
+            var result = new List<DescriptorCapability>();
             for (int type = 0; type <= 2; type++)
             {
                 ushort count = checked((ushort)(type switch
@@ -191,19 +219,12 @@ internal static class Program
                 for (int n = 0; n < count; n++)
                 {
                     int offset = n * 72;
-                    result.Add(new
-                    {
-                        reportType = new[] { "input", "output", "feature" }[type],
-                        usagePage = BitConverter.ToUInt16(buffer, offset), reportId = buffer[offset + 2],
-                        isRange = buffer[offset + 12] != 0,
-                        bitSize = BitConverter.ToUInt16(buffer, offset + 18),
-                        reportCount = BitConverter.ToUInt16(buffer, offset + 20),
-                        logicalMin = BitConverter.ToInt32(buffer, offset + 40),
-                        logicalMax = BitConverter.ToInt32(buffer, offset + 44),
-                        usageMinOrUsage = BitConverter.ToUInt16(buffer, offset + 56),
-                        usageMaxIfRange = BitConverter.ToUInt16(buffer, offset + 58),
-                        rawValueCapsHex = Convert.ToHexString(buffer.AsSpan(offset, 72))
-                    });
+                    result.Add(new DescriptorCapability(new[] { "input", "output", "feature" }[type],
+                        BitConverter.ToUInt16(buffer, offset), buffer[offset + 2], buffer[offset + 12] != 0,
+                        BitConverter.ToUInt16(buffer, offset + 18), BitConverter.ToUInt16(buffer, offset + 20),
+                        BitConverter.ToInt32(buffer, offset + 40), BitConverter.ToInt32(buffer, offset + 44),
+                        BitConverter.ToUInt16(buffer, offset + 56), BitConverter.ToUInt16(buffer, offset + 58),
+                        Convert.ToHexString(buffer.AsSpan(offset, 72))));
                 }
             }
             return result;
